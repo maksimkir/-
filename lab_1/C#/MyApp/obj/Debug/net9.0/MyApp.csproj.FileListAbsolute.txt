@@ -26,3 +26,4 @@ c:\F\CHNU\labs_2course\ПКПЗ\lab_1\C#\MyApp\obj\Debug\net9.0\refint\MyApp.dll
 c:\F\CHNU\labs_2course\ПКПЗ\lab_1\C#\MyApp\obj\Debug\net9.0\MyApp.pdb
 c:\F\CHNU\labs_2course\ПКПЗ\lab_1\C#\MyApp\obj\Debug\net9.0\MyApp.genruntimeconfig.cache
 c:\F\CHNU\labs_2course\ПКПЗ\lab_1\C#\MyApp\obj\Debug\net9.0\ref\MyApp.dll
+C:\F\CHNU\labs_2course\ПКПЗ\lab_1\C#\MyApp\obj\Debug\net9.0\MyApp.sourcelink.json
