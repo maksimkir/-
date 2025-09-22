@@ -83,6 +83,7 @@ class Program
             for (int j = i + 1; j < all.Length; j++)
                 if (all[i][0] == all[j][0] && all[i][1] == all[j][1])
                     return false;
+                    
         return true;
     }
 }
