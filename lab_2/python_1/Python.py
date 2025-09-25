@@ -22,3 +22,14 @@ def sum_unique(arr):
 
 # запуск програми
 arraye()
+
+def main():
+    arr = array('i', [1, 2, 3, 2, 4, 5, 1])
+    total = 0
+    for val in arr:
+        if arr.count(val) == 1:
+            total += val
+    print("\nПриклад запуску з наперед визначеним масивом:", arr.tolist())
+    print("Сума унікальних елементів масиву:", total)
+    
+main()
