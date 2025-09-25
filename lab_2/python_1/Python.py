@@ -1,0 +1,24 @@
+from array import *
+
+def arraye():
+    arr = array('i', [])
+    size = int(input("Введіть розмір масиву: "))
+    if size <= 0:
+        print("Розмір має бути додатнім цілим числом.")
+        return
+    
+    for _ in range(size):
+        znach = int(input("Введіть елемент масиву: "))
+        arr.append(znach)
+
+    sum_unique(arr)
+
+def sum_unique(arr):
+    total = 0
+    for val in arr:
+        if arr.count(val) == 1:  # зустрічається лише один раз
+            total += val
+    print("Сума унікальних елементів масиву:", total)
+
+# запуск програми
+arraye()
