@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_1\\C#\\MyApp\\MyApp.csproj": {}
+    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_2\\1.2\\1.2.csproj": {}
   },
   "projects": {
-    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_1\\C#\\MyApp\\MyApp.csproj": {
+    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_2\\1.2\\1.2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_1\\C#\\MyApp\\MyApp.csproj",
-        "projectName": "MyApp",
-        "projectPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_1\\C#\\MyApp\\MyApp.csproj",
+        "projectUniqueName": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_2\\1.2\\1.2.csproj",
+        "projectName": "1.2",
+        "projectPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_2\\1.2\\1.2.csproj",
         "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_1\\C#\\MyApp\\obj\\",
+        "outputPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_2\\1.2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config"
