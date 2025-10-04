@@ -16,7 +16,7 @@ def arraye():
 def sum_unique(arr):
     total = 0
     for val in arr:
-        if arr.count(val) == 1:  # зустрічається лише один раз
+        if arr.count(val) == 1: 
             total += val
     print("Сума унікальних елементів масиву:", total)
 

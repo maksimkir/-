@@ -1,0 +1,5 @@
+C:\F\CHNU\labs_2course\ПКПЗ\lab_3\3.1\obj\Debug\net8.0-windows\3.1.GeneratedMSBuildEditorConfig.editorconfig
+C:\F\CHNU\labs_2course\ПКПЗ\lab_3\3.1\obj\Debug\net8.0-windows\3.1.AssemblyInfoInputs.cache
+C:\F\CHNU\labs_2course\ПКПЗ\lab_3\3.1\obj\Debug\net8.0-windows\3.1.AssemblyInfo.cs
+C:\F\CHNU\labs_2course\ПКПЗ\lab_3\3.1\obj\Debug\net8.0-windows\3.1.csproj.CoreCompileInputs.cache
+C:\F\CHNU\labs_2course\ПКПЗ\lab_3\3.1\obj\Debug\net8.0-windows\3.1.sourcelink.json

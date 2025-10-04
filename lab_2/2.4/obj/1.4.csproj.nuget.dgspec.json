@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_2\\1.4\\1.4.csproj": {}
+    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_2\\2.4\\1.4.csproj": {}
   },
   "projects": {
-    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_2\\1.4\\1.4.csproj": {
+    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_2\\2.4\\1.4.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_2\\1.4\\1.4.csproj",
+        "projectUniqueName": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_2\\2.4\\1.4.csproj",
         "projectName": "1.4",
-        "projectPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_2\\1.4\\1.4.csproj",
+        "projectPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_2\\2.4\\1.4.csproj",
         "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_2\\1.4\\obj\\",
+        "outputPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_2\\2.4\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config"

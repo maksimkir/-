@@ -1,0 +1,28 @@
+C#:
+
+
+using System.Windows.Forms;
+
+namespace CountABCApp
+{
+    public class MainForm : Form
+    {
+        private TextBox inputBox;
+        private Button checkButton;
+
+        public MainForm()
+        {
+            this.Text = "Пошук 'abc'";
+            this.Width = 400;
+            this.Height = 200;
+
+            Label label = new Label() { Text = "text:", Top = 20, Left = 20, Width = 200 };
+            inputBox = new TextBox() { Top = 50, Left = 20, Width = 300 };
+
+            checkButton = new Button() { Text = "text", Top = 90, Left = 20, Width = 100 };
+            checkButton.Click += CheckButton_Click;
+
+            this.Controls.Add(label);
+            this.Controls.Add(inputBox);
+            this.Controls.Add(checkButton);
+        }

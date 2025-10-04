@@ -1,0 +1,93 @@
+C#:
+
+консоль:
+dotnet new winforms -n CountABCApp
+
+Переконайтесь, що у файлі .csproj є рядок:
+<UseWindowsForms>true</UseWindowsForms> (цкй рядок вставити у <PropertyGroup>)
+
+net9.0-windows
+
+
+
+public class MainForm : Form
+тут клас MainForm успадковується від Form → це і є вікно.
+
+
+Label productLabel = new Label() { Text = "Назва товару:", Top = 20, Left = 20 };
+productBox = new TextBox() { Top = 40, Left = 20, Width = 200 };
+addButton = new Button() { Text = "Додати", Top = 140, Left = 20 };
+outputList = new ListBox() { Top = 180, Left = 20, Width = 300, Height = 100 };
+Label – напис (підпис поля),
+TextBox – поле вводу,
+Button – кнопка,
+ListBox – список для результатів.
+
+
+Додаємо елементи у вікно → тепер вони видимі.
+this.Controls.Add(productLabel);
+this.Controls.Add(productBox);
+this.Controls.Add(addButton);
+this.Controls.Add(outputList);
+
+Запускає головне вікно програми.
+Application.Run(new MainForm());
+
+Отже, GUI тут – це вікно Form + усі його елементи (Label, TextBox, Button, ListBox).
+
+
+
+Python:
+
+1)  root = tk.Tk()
+    root.title("Склад товарів")
+    root.geometry("400x300")
+
+Tk() створює головне вікно програми.
+title задає заголовок, geometry – розмір.
+
+
+
+2)  label1 = tk.Label(root, text="Назва товару:")
+    entry_product = tk.Entry(root)
+    btn = tk.Button(root, text="Додати", command=add_item)
+    listbox = tk.Listbox(root, width=50, height=10)
+
+  GUI-елементи:
+
+Label – напис,
+Entry – поле для вводу,
+Button – кнопка,
+Listbox – список для результатів.
+
+
+3)  label1.pack()  
+    entry_product.pack()
+    btn.pack()
+    listbox.pack()
+
+розміщення елементів у вікні (pack = автоматичне вирівнювання).
+
+
+4)  root.mainloop()
+
+запускає цикл GUI → без нього вікно закриється одразу
+
+Отже, GUI тут – це вікно Tk() + усі елементи (Label, Entry, Button, Listbox).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.

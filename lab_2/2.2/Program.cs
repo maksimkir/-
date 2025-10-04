@@ -10,7 +10,7 @@ class Program
         int[] X = new int[n];
         Random rnd = new Random();
 
-        // Генерація матриць A і B
+      
         for (int i = 0; i < n; i++)
         {
             for (int j = 0; j < n; j++)
@@ -20,15 +20,15 @@ class Program
             }
         }
 
-        // Вивід матриці A
+       
         Console.WriteLine("Matrix A:");
         PrintMatrix(A);
 
-        // Вивід матриці B
+        
         Console.WriteLine("Matrix B:");
         PrintMatrix(B);
 
-        // Формування вектора X
+      
         for (int i = 0; i < n; i++)
         {
             bool allGreater = true;

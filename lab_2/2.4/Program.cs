@@ -5,7 +5,7 @@ class Program
 {
     static void Main()
     {
-        // Приклад зубчастого масиву
+        // Створення рваного масиву
         int[][] jaggedArray = new int[][]
         {
             new int[] { 0, -2, 3 },
@@ -13,12 +13,14 @@ class Program
             new int[] { -1, 6, 7, 8 }
         };
 
-        // Знаходимо максимальну кількість стовпців
         int maxCols = 0;
         foreach (var row in jaggedArray)
-            if (row.Length > maxCols) maxCols = row.Length;
+        {
+            if (row.Length > maxCols)
+                maxCols = row.Length;
+        }
 
-        // Масив для перших додатних елементів у кожному стовпці
+        //додатних елементів
         List<int?> firstPositives = new List<int?>();
 
         for (int col = 0; col < maxCols; col++)
@@ -35,7 +37,6 @@ class Program
             firstPositives.Add(firstPositive);
         }
 
-        // Вивід результату
         Console.WriteLine("Перші додатні елементи у кожному стовпці:");
         for (int i = 0; i < firstPositives.Count; i++)
         {
