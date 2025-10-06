@@ -14,24 +14,24 @@ namespace RemoveOddLengthWords
 
         public MainForm()
         {
-            // Налаштування форми
+        
             this.Text = "Видалення слів непарної довжини";
             this.Width = 600;
             this.Height = 300;
 
-            // Поле для введення
+           
             inputLabel = new Label() { Text = "Введіть текст:", Top = 20, Left = 20, Width = 200 };
             inputBox = new TextBox() { Top = 50, Left = 20, Width = 540 };
 
-            // Кнопка
+      
             processButton = new Button() { Text = "Обробити", Top = 90, Left = 20, Width = 100 };
             processButton.Click += ProcessButton_Click;
 
-            // Поле для виводу
+           
             outputLabel = new Label() { Text = "Результат:", Top = 140, Left = 20, Width = 200 };
             outputBox = new TextBox() { Top = 170, Left = 20, Width = 540, Multiline = true, Height = 60 };
 
-            // Додавання елементів на форму
+            
             this.Controls.Add(inputLabel);
             this.Controls.Add(inputBox);
             this.Controls.Add(processButton);
