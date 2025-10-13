@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1", "4.1", "{665F8ED9-9166-F5B3-EA85-F8CA1FA2E289}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZooWinFormsApp", "4.1\ZooWinFormsApp\ZooWinFormsApp.csproj", "{3FB0B56E-94D8-EB0A-78B6-8B0198A71416}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3FB0B56E-94D8-EB0A-78B6-8B0198A71416}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FB0B56E-94D8-EB0A-78B6-8B0198A71416}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FB0B56E-94D8-EB0A-78B6-8B0198A71416}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FB0B56E-94D8-EB0A-78B6-8B0198A71416}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3FB0B56E-94D8-EB0A-78B6-8B0198A71416} = {665F8ED9-9166-F5B3-EA85-F8CA1FA2E289}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4D5ECA52-9CB9-4554-9246-758F0B3AA774}
+	EndGlobalSection
+EndGlobal
