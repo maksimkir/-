@@ -6,6 +6,7 @@ namespace RemoveOddLengthWords
 {
     public class MainForm : Form
     {
+        //елементи інтерфейсу
         private TextBox inputBox;
         private Button processButton;
         private TextBox outputBox;
