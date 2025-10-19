@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ZooWinFormsApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e1f767647cb7dc893edfcca680d6e70c51ba4a4d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e111c985bb3d63518f347b7cc2b3060ad59f3641")]
 [assembly: System.Reflection.AssemblyProductAttribute("ZooWinFormsApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ZooWinFormsApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
