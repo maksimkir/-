@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZooFinder", "ZooFinder\ZooFinder.csproj", "{B7491317-D4EC-76E3-E54E-D103E013D986}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7491317-D4EC-76E3-E54E-D103E013D986}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7491317-D4EC-76E3-E54E-D103E013D986}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7491317-D4EC-76E3-E54E-D103E013D986}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7491317-D4EC-76E3-E54E-D103E013D986}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E7869819-1796-4FC6-ABB9-845D4E5860B6}
+	EndGlobalSection
+EndGlobal

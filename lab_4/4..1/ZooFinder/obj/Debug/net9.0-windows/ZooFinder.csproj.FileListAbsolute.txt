@@ -1,0 +1,5 @@
+C:\F\CHNU\labs_2course\ПКПЗ\lab_4\4..1\ZooFinder\obj\Debug\net9.0-windows\ZooFinder.GeneratedMSBuildEditorConfig.editorconfig
+C:\F\CHNU\labs_2course\ПКПЗ\lab_4\4..1\ZooFinder\obj\Debug\net9.0-windows\ZooFinder.AssemblyInfoInputs.cache
+C:\F\CHNU\labs_2course\ПКПЗ\lab_4\4..1\ZooFinder\obj\Debug\net9.0-windows\ZooFinder.AssemblyInfo.cs
+C:\F\CHNU\labs_2course\ПКПЗ\lab_4\4..1\ZooFinder\obj\Debug\net9.0-windows\ZooFinder.csproj.CoreCompileInputs.cache
+C:\F\CHNU\labs_2course\ПКПЗ\lab_4\4..1\ZooFinder\obj\Debug\net9.0-windows\ZooFinder.sourcelink.json
