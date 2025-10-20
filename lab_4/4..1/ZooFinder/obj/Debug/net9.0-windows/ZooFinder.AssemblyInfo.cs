@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ZooFinder")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a07feb42f3197c64586a18bd9fac8892e17934d0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9924ad6611f5b2abf872c9b7bc32e8ed15735182")]
 [assembly: System.Reflection.AssemblyProductAttribute("ZooFinder")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ZooFinder")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
