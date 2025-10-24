@@ -1,7 +1,4 @@
-﻿// ZooFinder_WinForms_CSharp.cs
-// .NET 6+ Windows Forms single-file example (Program + Form in one file for simplicity)
-// Реалізація лабораторної роботи "Зоопарк"
-
+﻿
 using System;
 using System.IO;
 using System.Linq;
@@ -14,7 +11,7 @@ namespace ZooFinder
         [STAThread]
         static void Main()
         {
-            ApplicationConfiguration.Initialize(); // .NET 6+ WinForms
+            ApplicationConfiguration.Initialize(); 
             Application.Run(new MainForm());
         }
     }
@@ -103,10 +100,8 @@ namespace ZooFinder
             inputFilePath = openFileDialog.FileName;
 
             try
-            {
-                // Метод порядкового зчитування: читаємо весь файл, розбиваємо на токени
+            {      
                 string text = File.ReadAllText(inputFilePath);
-                // Можливі роздільники: крапка з комою, новий рядок
                 char[] separators = new char[] { ';', '\n', '\r' };
                 var rawTokens = text.Split(separators, StringSplitOptions.RemoveEmptyEntries)
                                      .Select(t => t.Trim()).ToList();
@@ -120,7 +115,6 @@ namespace ZooFinder
                 int rows = rawTokens.Count / COLUMNS;
                 dataArray = new string[rows, COLUMNS];
 
-                // Заповнюємо двовимірний масив порядково
                 int idx = 0;
                 for (int r = 0; r < rows; r++)
                 {
@@ -130,7 +124,6 @@ namespace ZooFinder
                     }
                 }
 
-                // Відобразимо в dgvInput
                 dgvInput.Rows.Clear();
                 for (int r = 0; r < rows; r++)
                 {
@@ -155,7 +148,6 @@ namespace ZooFinder
                 return;
             }
 
-            // Знайдемо рядки, де назва тварини містить "уссур" і "тигр" або точну назву
             int rows = dataArray.GetLength(0);
             var matchedRows = new System.Collections.Generic.List<string[]>();
 
@@ -171,7 +163,6 @@ namespace ZooFinder
                 }
             }
 
-            // Показати знайдені у dgvResults
             dgvResults.Rows.Clear();
             foreach (var row in matchedRows) dgvResults.Rows.Add(row);
 
@@ -180,7 +171,6 @@ namespace ZooFinder
                 MessageBox.Show("У вхідних даних не знайдено зоопарків з уссурійськими тиграми.", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            // Запит на збереження результату у файл
             if (saveFileDialog.ShowDialog() != DialogResult.OK)
                 return;
 
@@ -188,7 +178,6 @@ namespace ZooFinder
             {
                 using (var sw = new StreamWriter(saveFileDialog.FileName))
                 {
-                    // Записуємо у той же формат: кожен токен розділений крапкою з комою, запис послідовно
                     foreach (var row in matchedRows)
                     {
                         sw.WriteLine(string.Join("; ", row));
@@ -204,20 +193,3 @@ namespace ZooFinder
         }
     }
 }
-
-/*
-README — як підготувати Input Data
-Формат файлу: plain text. Поля записані послідовно як токени, розділені крапкою з комою (;) або новим рядком.
-Кількість полів на один запис = 12 (статична). Приклад одного запису (усі поля через ";"):
-
-Уссурійський тигр; 1; 690000; Ukraine; Kharkivska; Kharkivskyi; Kharkiv; Shevchenka; 10; 0; 5; 30
-
-Кілька записів — кожен запис в окремому рядку або всі токени послідовно. Важливо: загальна кількість токенів у файлі має ділитися на 12.
-
-Output Data: кожен знайдений запис записується в новий рядок у тому ж форматі (кожне поле через "; ").
-
-Інструкції компіляції та запуску:
-- Відкрийте Visual Studio (або будь-яке IDE). Створіть проект Windows Forms App (.NET) (версія .NET 6/7).
-- Додайте цей файл як Program.cs (замініть стандартний код) або скопіюйте в відповідні місця.
-- Побудуйте та запустіть.
-*/
