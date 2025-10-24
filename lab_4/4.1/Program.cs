@@ -1,221 +1,223 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// ZooFinder_WinForms_CSharp.cs
+// .NET 6+ Windows Forms single-file example (Program + Form in one file for simplicity)
+// Реалізація лабораторної роботи "Зоопарк"
+
+using System;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 
-// Клас для опису адреси
-public class Address
+namespace ZooFinder
 {
-    public string PostalCode { get; set; }
-    public string Country { get; set; }
-    public string Region { get; set; }
-    public string District { get; set; }
-    public string City { get; set; }
-    public string Street { get; set; }
-    public string House { get; set; }
-    public string Apartment { get; set; }
-
-    public override string ToString()
+    static class Program
     {
-        return $"Адреса: {PostalCode}, {Country}, {City}, {Street} буд. {House}";
-    }
-}
-
-// Клас для опису об'єкта "Зоопарк"
-public class Zoo
-{
-    // Оскільки вхідні дані описують тварину та її кількість у конкретному зоопарку,
-    // і ми зчитуємо їх для *зоопарку*, то для кожного зоопарку ми можемо мати список тварин.
-    // Але за умовою "розмір масиву статичний та рівний кількості параметрів, які описують об’єкт",
-    // ми будемо вважати, що кожен блок даних - це інформація про *зоопарк*, де перші два поля 
-    // - це *один вид* тварини в ньому.
-
-    public string AnimalName { get; set; }      // Назва тварини (для фільтрації)
-    public int SpeciesCount { get; set; }       // Кількість цього виду
-    public Address Location { get; set; }
-    public int TotalAnimals { get; set; }       // Загальна кількість тварин
-    public int EmployeeCount { get; set; }      // Кількість працівників
-
-    // Статичний розмір масиву для зчитування (використовується в логіці ReadData)
-    // 1 (AnimalName) + 1 (SpeciesCount) + 8 (Address fields) + 1 (TotalAnimals) + 1 (EmployeeCount) = 12
-    public const int ParameterCount = 12;
-
-    public override string ToString()
-    {
-        return $"Тварина: {AnimalName}, Кількість: {SpeciesCount}\n" +
-               $"{Location.ToString()}\n" +
-               $"Загалом тварин: {TotalAnimals}, Працівників: {EmployeeCount}\n";
-    }
-}
-
-public class DataProcessor
-{
-    private const string InputFileName = "Input Data.txt";
-    private const string OutputFileName = "Output Data.txt";
-
-    /// <summary>
-    /// Зчитує дані про зоопарки з файлу.
-    /// Використовує метод послідовного зчитування даних (StreamReader.ReadLine).
-    /// </summary>
-    public static List<Zoo> ReadData()
-    {
-        var zoos = new List<Zoo>();
-
-        if (!File.Exists(InputFileName))
+        [STAThread]
+        static void Main()
         {
-            Console.WriteLine($"Помилка: Файл '{InputFileName}' не знайдено. Створіть його!");
-            return zoos;
+            ApplicationConfiguration.Initialize(); // .NET 6+ WinForms
+            Application.Run(new MainForm());
+        }
+    }
+
+    public class MainForm : Form
+    {
+        // Статичний набір полів (кількість параметрів):
+        // 0 - AnimalName (назва тварини)
+        // 1 - SpeciesCount (кількість виду)
+        // 2 - PostalCode (поштовий індекс)
+        // 3 - Country
+        // 4 - Region (область)
+        // 5 - District (район)
+        // 6 - City (місто)
+        // 7 - Street (вулиця)
+        // 8 - House (будинок)
+        // 9 - Apartment (квартира)
+        // 10 - TotalAnimals (загальна кількість тварин)
+        // 11 - Employees (кількість працівників)
+        const int COLUMNS = 12;
+
+        private Button btnLoad;
+        private Button btnProcessSave;
+        private DataGridView dgvInput;
+        private DataGridView dgvResults;
+        private OpenFileDialog openFileDialog;
+        private SaveFileDialog saveFileDialog;
+        private Label lblInfo;
+
+        private string[,] dataArray = null; // двовимірний масив даних
+        private string inputFilePath = null;
+
+        public MainForm()
+        {
+            Text = "ZooFinder — лабораторна: Зоопарк";
+            Width = 1000;
+            Height = 700;
+            StartPosition = FormStartPosition.CenterScreen;
+
+            btnLoad = new Button { Text = "Load Input Data", Left = 10, Top = 10, Width = 140 };
+            btnLoad.Click += BtnLoad_Click;
+
+            btnProcessSave = new Button { Text = "Find Ussuri Tigers & Save Output", Left = 160, Top = 10, Width = 220 };
+            btnProcessSave.Click += BtnProcessSave_Click;
+
+            lblInfo = new Label { Left = 400, Top = 15, AutoSize = true };
+
+            dgvInput = new DataGridView { Left = 10, Top = 50, Width = 960, Height = 300, ReadOnly = true, AllowUserToAddRows = false };
+            dgvResults = new DataGridView { Left = 10, Top = 370, Width = 960, Height = 270, ReadOnly = true, AllowUserToAddRows = false };
+
+            Controls.Add(btnLoad);
+            Controls.Add(btnProcessSave);
+            Controls.Add(lblInfo);
+            Controls.Add(dgvInput);
+            Controls.Add(dgvResults);
+
+            openFileDialog = new OpenFileDialog { Filter = "Text Files|*.txt;*.csv|All Files|*.*", Title = "Open Input Data" };
+            saveFileDialog = new SaveFileDialog { Filter = "Text Files|*.txt|All Files|*.*", Title = "Save Output Data" };
+
+            SetupGridColumns(dgvInput);
+            SetupGridColumns(dgvResults);
         }
 
-        try
+        private void SetupGridColumns(DataGridView grid)
         {
-            using (var sr = new StreamReader(InputFileName))
+            grid.Columns.Clear();
+            grid.Columns.Add("AnimalName", "Назва тварини");
+            grid.Columns.Add("SpeciesCount", "Кількість виду");
+            grid.Columns.Add("PostalCode", "Поштовий індекс");
+            grid.Columns.Add("Country", "Країна");
+            grid.Columns.Add("Region", "Область");
+            grid.Columns.Add("District", "Район");
+            grid.Columns.Add("City", "Місто");
+            grid.Columns.Add("Street", "Вулиця");
+            grid.Columns.Add("House", "Будинок");
+            grid.Columns.Add("Apartment", "Квартира");
+            grid.Columns.Add("TotalAnimals", "Загальна кількість тварин");
+            grid.Columns.Add("Employees", "Кількість працівників");
+        }
+
+        private void BtnLoad_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            inputFilePath = openFileDialog.FileName;
+
+            try
             {
-                // Для відповідності вимозі "Організувати читання даних із файлу в двовимірний масив"
-                // ми будемо зчитувати кожен об'єкт як масив рядків, а потім парсити його.
-                // Розмір масиву: [Кількість об'єктів][Кількість параметрів]
-                
-                string line;
-                while ((line = sr.ReadLine()) != null)
+                // Метод порядкового зчитування: читаємо весь файл, розбиваємо на токени
+                string text = File.ReadAllText(inputFilePath);
+                // Можливі роздільники: крапка з комою, новий рядок
+                char[] separators = new char[] { ';', '\n', '\r' };
+                var rawTokens = text.Split(separators, StringSplitOptions.RemoveEmptyEntries)
+                                     .Select(t => t.Trim()).ToList();
+
+                if (rawTokens.Count % COLUMNS != 0)
                 {
-                    // Це початок нового об'єкта Zoo, зчитуємо 12 послідовних рядків
-                    string[] rawData = new string[Zoo.ParameterCount];
-                    rawData[0] = line.Trim(); // AnimalName
-
-                    for (int i = 1; i < Zoo.ParameterCount; i++)
-                    {
-                        string nextLine = sr.ReadLine();
-                        if (nextLine == null)
-                        {
-                            Console.WriteLine("Помилка: Неповний набір даних в кінці файлу.");
-                            return zoos; // Повертаємо те, що вже зчитали
-                        }
-                        rawData[i] = nextLine.Trim();
-                    }
-
-                    // Парсинг даних з масиву
-                    var zoo = new Zoo
-                    {
-                        AnimalName = rawData[0],
-                        SpeciesCount = int.Parse(rawData[1]),
-                        Location = new Address
-                        {
-                            PostalCode = rawData[2],
-                            Country = rawData[3],
-                            Region = rawData[4],
-                            District = rawData[5],
-                            City = rawData[6],
-                            Street = rawData[7],
-                            House = rawData[8],
-                            Apartment = rawData[9]
-                        },
-                        TotalAnimals = int.Parse(rawData[10]),
-                        EmployeeCount = int.Parse(rawData[11])
-                    };
-
-                    zoos.Add(zoo);
+                    MessageBox.Show($"Кількість токенів у файлі ({rawTokens.Count}) не ділиться на {COLUMNS}. Перевірте формат вводу.", "Помилка формату", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-            }
-        }
-        catch (FormatException ex)
-        {
-            Console.WriteLine($"Помилка формату даних (очікувалося число): {ex.Message}");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Сталася помилка при читанні файлу: {ex.Message}");
-        }
 
-        return zoos;
-    }
+                int rows = rawTokens.Count / COLUMNS;
+                dataArray = new string[rows, COLUMNS];
 
-    /// <summary>
-    /// Проводить обробку даних: вибір зоопарків з уссурійськими тиграми.
-    /// </summary>
-    public static List<Zoo> ProcessData(List<Zoo> allZoos)
-    {
-        // Завдання: Вивести відомості про зоопарки, де є уссурійські тигри.
-        var filteredZoos = allZoos
-            .Where(z => z.AnimalName.Equals("Уссурійський тигр", StringComparison.OrdinalIgnoreCase))
-            .ToList();
-
-        return filteredZoos;
-    }
-
-    /// <summary>
-    /// Записує результат обробки у вихідний файл.
-    /// </summary>
-    public static void WriteData(List<Zoo> results)
-    {
-        try
-        {
-            // true в конструкторі StreamWriter означає додавання даних до існуючого файлу, 
-            // але для лабораторної роботи зазвичай файл перезаписується, тому не передаємо другий аргумент.
-            using (var sw = new StreamWriter(OutputFileName, false)) 
-            {
-                if (results.Any())
+                // Заповнюємо двовимірний масив порядково
+                int idx = 0;
+                for (int r = 0; r < rows; r++)
                 {
-                    sw.WriteLine($"=== ЗОНА РЕЗУЛЬТАТІВ: ЗОБАРКИ З УССУРІЙСЬКИМИ ТИГРАМИ (КІЛЬКІСТЬ: {results.Count}) ===");
-                    foreach (var zoo in results)
+                    for (int c = 0; c < COLUMNS; c++)
                     {
-                        sw.WriteLine("-------------------------------------");
-                        sw.WriteLine(zoo.ToString());
+                        dataArray[r, c] = rawTokens[idx++];
                     }
                 }
-                else
+
+                // Відобразимо в dgvInput
+                dgvInput.Rows.Clear();
+                for (int r = 0; r < rows; r++)
                 {
-                    sw.WriteLine("Жодного зоопарку з уссурійськими тиграми не знайдено.");
+                    var row = new string[COLUMNS];
+                    for (int c = 0; c < COLUMNS; c++) row[c] = dataArray[r, c];
+                    dgvInput.Rows.Add(row);
+                }
+
+                lblInfo.Text = $"Loaded: {rows} records from {Path.GetFileName(inputFilePath)}";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Помилка при зчитуванні файлу:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void BtnProcessSave_Click(object sender, EventArgs e)
+        {
+            if (dataArray == null)
+            {
+                MessageBox.Show("Спочатку завантажте вхідний файл.", "Немає даних", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Знайдемо рядки, де назва тварини містить "уссур" і "тигр" або точну назву
+            int rows = dataArray.GetLength(0);
+            var matchedRows = new System.Collections.Generic.List<string[]>();
+
+            for (int r = 0; r < rows; r++)
+            {
+                string animal = dataArray[r, 0] ?? "";
+                string animalLower = animal.ToLowerInvariant();
+                if (animalLower.Contains("уссур") || (animalLower.Contains("тигр") && animalLower.Contains("усс")) || animalLower.Contains("уссурійський") || animalLower.Contains("ussuri") )
+                {
+                    var row = new string[COLUMNS];
+                    for (int c = 0; c < COLUMNS; c++) row[c] = dataArray[r, c];
+                    matchedRows.Add(row);
                 }
             }
-            Console.WriteLine($"\nОбробку завершено. Результати записано у файл '{OutputFileName}'.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Сталася помилка при записі файлу: {ex.Message}");
+
+            // Показати знайдені у dgvResults
+            dgvResults.Rows.Clear();
+            foreach (var row in matchedRows) dgvResults.Rows.Add(row);
+
+            if (matchedRows.Count == 0)
+            {
+                MessageBox.Show("У вхідних даних не знайдено зоопарків з уссурійськими тиграми.", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            // Запит на збереження результату у файл
+            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            try
+            {
+                using (var sw = new StreamWriter(saveFileDialog.FileName))
+                {
+                    // Записуємо у той же формат: кожен токен розділений крапкою з комою, запис послідовно
+                    foreach (var row in matchedRows)
+                    {
+                        sw.WriteLine(string.Join("; ", row));
+                    }
+                }
+
+                MessageBox.Show($"Output saved to {saveFileDialog.FileName}", "Збережено", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Помилка при збереженні файлу:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
 
-// Головна програма (імітація роботи GUI)
-class Program
-{
-    static void Main(string[] args)
-    {
-        Console.WriteLine("=== ЗАПУСК ЛАБОРАТОРНОЇ РОБОТИ: ОБРОБКА ДАНИХ ЗООПАРКІВ ===");
+/*
+README — як підготувати Input Data
+Формат файлу: plain text. Поля записані послідовно як токени, розділені крапкою з комою (;) або новим рядком.
+Кількість полів на один запис = 12 (статична). Приклад одного запису (усі поля через ";"):
 
-        // 1. Зчитування даних
-        Console.WriteLine("\nЕтап 1: Читання даних з файлу...");
-        var allZoos = DataProcessor.ReadData();
+Уссурійський тигр; 1; 690000; Ukraine; Kharkivska; Kharkivskyi; Kharkiv; Shevchenka; 10; 0; 5; 30
 
-        if (!allZoos.Any())
-        {
-            Console.WriteLine("Немає даних для обробки. Завершення.");
-            return;
-        }
+Кілька записів — кожен запис в окремому рядку або всі токени послідовно. Важливо: загальна кількість токенів у файлі має ділитися на 12.
 
-        // Відображення користувачу (імітація GUI)
-        Console.WriteLine("\n--- ЗЧИТАНІ ДАНІ (ІМІТАЦІЯ ВІДОБРАЖЕННЯ НА GUI) ---");
-        allZoos.ForEach(z => Console.WriteLine(z.ToString()));
-        Console.WriteLine("----------------------------------------------------\n");
+Output Data: кожен знайдений запис записується в новий рядок у тому ж форматі (кожне поле через "; ").
 
-        // 2. Обробка даних
-        Console.WriteLine("Етап 2: Обробка даних (пошук зоопарків з уссурійськими тиграми)...");
-        var filteredZoos = DataProcessor.ProcessData(allZoos);
-
-        // 3. Відображення та запис результатів
-        Console.WriteLine("\n--- РЕЗУЛЬТАТИ ОБРОБКИ (ІМІТАЦІЯ ВІДОБРАЖЕННЯ НА GUI) ---");
-        if (filteredZoos.Any())
-        {
-            filteredZoos.ForEach(z => Console.WriteLine(z.ToString()));
-        }
-        else
-        {
-            Console.WriteLine("Жодного зоопарку з уссурійськими тиграми не знайдено.");
-        }
-        Console.WriteLine("----------------------------------------------------------");
-
-        DataProcessor.WriteData(filteredZoos);
-        
-        // Тут має бути код для запуску GUI додатку, якщо ви його використовуєте.
-    }
-}
+Інструкції компіляції та запуску:
+- Відкрийте Visual Studio (або будь-яке IDE). Створіть проект Windows Forms App (.NET) (версія .NET 6/7).
+- Додайте цей файл як Program.cs (замініть стандартний код) або скопіюйте в відповідні місця.
+- Побудуйте та запустіть.
+*/
