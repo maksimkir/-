@@ -1,195 +1,198 @@
-﻿
-using System;
-using System.IO;
-using System.Linq;
+﻿using System;
 using System.Windows.Forms;
+using System.Text;
 
-namespace ZooFinder
+namespace LabWorkGUI
 {
-    static class Program
+    // --- Базовий Клас: Фотоапарат ---
+    public abstract class Фотоапарат
     {
-        [STAThread]
-        static void Main()
+        // Поля (закриті, доступ через protected для спадкоємців)
+        protected string модель;
+        protected double zoom;
+        protected string матеріалКорпусу;
+
+        // Конструктор
+        public Фотоапарат(string модель, double zoom, string матеріалКорпусу)
         {
-            ApplicationConfiguration.Initialize(); 
-            Application.Run(new MainForm());
+            if (zoom < 1 || zoom > 35)
+                throw new ArgumentOutOfRangeException("Zoom", "Zoom має бути в межах від 1 до 35.");
+            if (матеріалКорпусу.ToLower() != "метал" && матеріалКорпусу.ToLower() != "пластик")
+                throw new ArgumentException("Матеріал корпусу має бути 'метал' або 'пластик'.", "матеріалКорпусу");
+
+            this.модель = модель;
+            this.zoom = zoom;
+            this.матеріалКорпусу = матеріалКорпусу.ToLower();
+        }
+
+        // Метод 1: Вартість (віртуальний)
+        public virtual double Вартість()
+        {
+            double baseCost = (zoom + 2) * (матеріалКорпусу == "пластик" ? 10 : 15);
+            return baseCost;
+        }
+
+        // Метод 2: Дорогий
+        public bool Дорогий()
+        {
+            return Вартість() > 200;
+        }
+
+        // Метод 3: Інформація
+        public virtual string Інформація()
+        {
+            return $"Модель: {модель}, Zoom: {zoom:F1}, Вартість: {Вартість():F2} $";
         }
     }
 
-    public class MainForm : Form
+    // --- Похідний Клас 1: Цифровий Фотоапарат (Спадкоємець Фотоапарат) ---
+    public class ЦифровийФотоапарат : Фотоапарат
     {
-        // Статичний набір полів (кількість параметрів):
-        // 0 - AnimalName (назва тварини)
-        // 1 - SpeciesCount (кількість виду)
-        // 2 - PostalCode (поштовий індекс)
-        // 3 - Country
-        // 4 - Region (область)
-        // 5 - District (район)
-        // 6 - City (місто)
-        // 7 - Street (вулиця)
-        // 8 - House (будинок)
-        // 9 - Apartment (квартира)
-        // 10 - TotalAnimals (загальна кількість тварин)
-        // 11 - Employees (кількість працівників)
-        const int COLUMNS = 12;
+        protected int мегапікселі;
 
-        private Button btnLoad;
-        private Button btnProcessSave;
-        private DataGridView dgvInput;
-        private DataGridView dgvResults;
-        private OpenFileDialog openFileDialog;
-        private SaveFileDialog saveFileDialog;
-        private Label lblInfo;
-
-        private string[,] dataArray = null; // двовимірний масив даних
-        private string inputFilePath = null;
-
-        public MainForm()
+        public ЦифровийФотоапарат(string модель, double zoom, string матеріалКорпусу, int мегапікселі)
+            : base(модель, zoom, матеріалКорпусу)
         {
-            Text = "ZooFinder — лабораторна: Зоопарк";
-            Width = 1000;
-            Height = 700;
-            StartPosition = FormStartPosition.CenterScreen;
-
-            btnLoad = new Button { Text = "Load Input Data", Left = 10, Top = 10, Width = 140 };
-            btnLoad.Click += BtnLoad_Click;
-
-            btnProcessSave = new Button { Text = "Find Ussuri Tigers & Save Output", Left = 160, Top = 10, Width = 220 };
-            btnProcessSave.Click += BtnProcessSave_Click;
-
-            lblInfo = new Label { Left = 400, Top = 15, AutoSize = true };
-
-            dgvInput = new DataGridView { Left = 10, Top = 50, Width = 960, Height = 300, ReadOnly = true, AllowUserToAddRows = false };
-            dgvResults = new DataGridView { Left = 10, Top = 370, Width = 960, Height = 270, ReadOnly = true, AllowUserToAddRows = false };
-
-            Controls.Add(btnLoad);
-            Controls.Add(btnProcessSave);
-            Controls.Add(lblInfo);
-            Controls.Add(dgvInput);
-            Controls.Add(dgvResults);
-
-            openFileDialog = new OpenFileDialog { Filter = "Text Files|*.txt;*.csv|All Files|*.*", Title = "Open Input Data" };
-            saveFileDialog = new SaveFileDialog { Filter = "Text Files|*.txt|All Files|*.*", Title = "Save Output Data" };
-
-            SetupGridColumns(dgvInput);
-            SetupGridColumns(dgvResults);
+            if (мегапікселі <= 0)
+                throw new ArgumentOutOfRangeException("мегапікселі", "Кількість мегапікселів має бути більше нуля.");
+            this.мегапікселі = мегапікселі;
         }
 
-        private void SetupGridColumns(DataGridView grid)
+        // Перевизначення Вартість
+        public override double Вартість()
         {
-            grid.Columns.Clear();
-            grid.Columns.Add("AnimalName", "Назва тварини");
-            grid.Columns.Add("SpeciesCount", "Кількість виду");
-            grid.Columns.Add("PostalCode", "Поштовий індекс");
-            grid.Columns.Add("Country", "Країна");
-            grid.Columns.Add("Region", "Область");
-            grid.Columns.Add("District", "Район");
-            grid.Columns.Add("City", "Місто");
-            grid.Columns.Add("Street", "Вулиця");
-            grid.Columns.Add("House", "Будинок");
-            grid.Columns.Add("Apartment", "Квартира");
-            grid.Columns.Add("TotalAnimals", "Загальна кількість тварин");
-            grid.Columns.Add("Employees", "Кількість працівників");
+            return base.Вартість() * мегапікселі;
         }
 
-        private void BtnLoad_Click(object sender, EventArgs e)
+        // Новий метод: Оновлення моделі
+        public void ОновленняМоделі()
         {
-            if (openFileDialog.ShowDialog() != DialogResult.OK)
-                return;
+            мегапікселі += 2;
+        }
+        
+        // Перевизначення Інформація
+        public override string Інформація()
+        {
+            // Викликаємо базовий Інформація, але додаємо мегапікселі
+            string baseInfo = ((Фотоапарат)this).Інформація(); 
+            return $"{baseInfo}, Мегапікселі: {мегапікселі} MP, Дорогий: {Дорогий()}";
+        }
+    }
 
-            inputFilePath = openFileDialog.FileName;
+    // --- Похідний Клас 2: Камера (Спадкоємець ЦифровийФотоапарат) ---
+    public class Камера : ЦифровийФотоапарат
+    {
+        private string типКамери;
 
+        public Камера(string модель, double zoom, string матеріалКорпусу, int мегапікселі, string типКамери)
+            : base(модель, zoom, матеріалКорпусу, мегапікселі)
+        {
+            this.типКамери = типКамери;
+        }
+
+        // Перевизначення Вартість
+        public override double Вартість()
+        {
+            // Вартість = Базова вартість Фотоапарата * Мегапікселі * 10
+            double baseCameraCost = ((Фотоапарат)this).Вартість(); 
+            return baseCameraCost * мегапікселі * 10;
+        }
+
+        // Перевизначення методу "Оновлення моделі"
+        public new void ОновленняМоделі()
+        {
+            мегапікселі += 20; // Збільшення на 20, а не на 2
+        }
+        
+        // Перевизначення Інформація
+        public override string Інформація()
+        {
+             // Викликаємо інформацію від Цифрового фотоапарата, але додаємо тип камери
+            return $"{base.Інформація()}, Тип камери: {типКамери}";
+        }
+    }
+
+    // -----------------------------------------------------------
+    // --- ГЛАВНИЙ МОДУЛЬ: ФОРМА (GUI) ---
+    // -----------------------------------------------------------
+
+    public partial class Form1 : Form
+    {
+        // Об'єкти класів, оголошені на рівні форми
+        private Фотоапарат camera;
+        private ЦифровийФотоапарат digitalCamera;
+        private Камера camcorder;
+
+        public Form1()
+        {
+            // Цей метод знаходиться в Form1.Designer.cs
+            InitializeComponent(); 
+            btnUpdate.Enabled = false; // Початково неактивна
+        }
+
+        private void btnCreateObjects_Click(object sender, EventArgs e)
+        {
             try
-            {      
-                string text = File.ReadAllText(inputFilePath);
-                char[] separators = new char[] { ';', '\n', '\r' };
-                var rawTokens = text.Split(separators, StringSplitOptions.RemoveEmptyEntries)
-                                     .Select(t => t.Trim()).ToList();
+            {
+                // Ввід даних з GUI елементів
+                string model = txtInputModel.Text;
+                double zoom = double.Parse(txtInputZoom.Text);
+                string material = txtInputMaterial.Text;
+                int megapixels = int.Parse(txtInputMegapixels.Text);
+                string camcorderType = txtInputCamcorderType.Text;
 
-                if (rawTokens.Count % COLUMNS != 0)
-                {
-                    MessageBox.Show($"Кількість токенів у файлі ({rawTokens.Count}) не ділиться на {COLUMNS}. Перевірте формат вводу.", "Помилка формату", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                // Створення об'єктів з передачею параметрів у конструктори
+                camera = new Фотоапарат(model + " (Базовий)", zoom, material);
+                digitalCamera = new ЦифровийФотоапарат(model + " (Цифровий)", zoom, material, megapixels);
+                camcorder = new Камера(model + " (Камера)", zoom, material, megapixels, camcorderType);
 
-                int rows = rawTokens.Count / COLUMNS;
-                dataArray = new string[rows, COLUMNS];
-
-                int idx = 0;
-                for (int r = 0; r < rows; r++)
-                {
-                    for (int c = 0; c < COLUMNS; c++)
-                    {
-                        dataArray[r, c] = rawTokens[idx++];
-                    }
-                }
-
-                dgvInput.Rows.Clear();
-                for (int r = 0; r < rows; r++)
-                {
-                    var row = new string[COLUMNS];
-                    for (int c = 0; c < COLUMNS; c++) row[c] = dataArray[r, c];
-                    dgvInput.Rows.Add(row);
-                }
-
-                lblInfo.Text = $"Loaded: {rows} records from {Path.GetFileName(inputFilePath)}";
+                DisplayInformation(false);
+                btnUpdate.Enabled = true; 
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Помилка вводу: Zoom та Мегапікселі мають бути коректними числами.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show("Помилка вводу: " + ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Помилка при зчитуванні файлу:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Невідома помилка: " + ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void BtnProcessSave_Click(object sender, EventArgs e)
+        private void DisplayInformation(bool isUpdate)
         {
-            if (dataArray == null)
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(isUpdate ? "--- ОНОВЛЕНА ІНФОРМАЦІЯ ---" : "--- ПОЧАТКОВА ІНФОРМАЦІЯ ПРО ОБ'ЄКТИ ---");
+
+            // Виведення інформації
+            sb.AppendLine($"[Фотоапарат]: {camera.Інформація()}");
+            sb.AppendLine($"[Цифровий Фотоапарат]: {digitalCamera.Інформація()}");
+            sb.AppendLine($"[Камера]: {camcorder.Інформація()}");
+            
+            if (isUpdate)
             {
-                MessageBox.Show("Спочатку завантажте вхідний файл.", "Немає даних", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                 txtOutput.AppendText(Environment.NewLine + sb.ToString());
             }
-
-            int rows = dataArray.GetLength(0);
-            var matchedRows = new System.Collections.Generic.List<string[]>();
-
-            for (int r = 0; r < rows; r++)
+            else
             {
-                string animal = dataArray[r, 0] ?? "";
-                string animalLower = animal.ToLowerInvariant();
-                if (animalLower.Contains("уссур") || (animalLower.Contains("тигр") && animalLower.Contains("усс")) || animalLower.Contains("уссурійський") || animalLower.Contains("ussuri") )
-                {
-                    var row = new string[COLUMNS];
-                    for (int c = 0; c < COLUMNS; c++) row[c] = dataArray[r, c];
-                    matchedRows.Add(row);
-                }
+                txtOutput.Text = sb.ToString();
             }
+        }
 
-            dgvResults.Rows.Clear();
-            foreach (var row in matchedRows) dgvResults.Rows.Add(row);
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (camera == null) return;
 
-            if (matchedRows.Count == 0)
-            {
-                MessageBox.Show("У вхідних даних не знайдено зоопарків з уссурійськими тиграми.", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            // Оновлення об'єктів
+            digitalCamera.ОновленняМоделі(); 
+            camcorder.ОновленняМоделі();    
 
-            if (saveFileDialog.ShowDialog() != DialogResult.OK)
-                return;
-
-            try
-            {
-                using (var sw = new StreamWriter(saveFileDialog.FileName))
-                {
-                    foreach (var row in matchedRows)
-                    {
-                        sw.WriteLine(string.Join("; ", row));
-                    }
-                }
-
-                MessageBox.Show($"Output saved to {saveFileDialog.FileName}", "Збережено", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Помилка при збереженні файлу:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            // Вивід оновленої інформації
+            DisplayInformation(true);
         }
     }
 }
