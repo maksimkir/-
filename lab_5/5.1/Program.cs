@@ -64,7 +64,7 @@ namespace FermaApp
 
         public MainForm()
         {
-            this.Text = "Ферма — Лабораторна робота";
+            this.Text = "Ферма;
             this.Width = 400;
             this.Height = 520;
 
