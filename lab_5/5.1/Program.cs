@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Drawing;
 using System.Windows.Forms;
-using System.Diagnostics;
 
 namespace FermaApp
 {
@@ -57,7 +55,6 @@ namespace FermaApp
         }
     }
 
-    [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
     public class MainForm : Form
     {
         // 🔹 Елементи інтерфейсу
@@ -68,40 +65,63 @@ namespace FermaApp
         public MainForm()
         {
             this.Text = "Ферма — Лабораторна робота";
-            this.Width = 420;
-            this.Height = 550;
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.BackColor = Color.Beige;
+            this.Width = 400;
+            this.Height = 520;
 
             Label lblTitle = new Label()
             {
                 Text = "Введіть дані про ферму:",
-                Font = new Font("Segoe UI", 12, FontStyle.Bold),
                 Top = 10,
                 Left = 20,
-                Width = 350
+                Width = 300
             };
             this.Controls.Add(lblTitle);
 
-            int y = 50;
+            int y = 40;
             int step = 40;
 
-            // 🔹 Поля вводу
-            AddLabelAndTextBox("Назва:", ref txtNazva, y); y += step;
-            AddLabelAndTextBox("Власник:", ref txtVlasnyk, y); y += step;
-            AddLabelAndTextBox("Площа (га):", ref txtPloshcha, y); y += step;
-            AddLabelAndTextBox("Кількість тварин:", ref txtTvaryny, y); y += step;
-            AddLabelAndTextBox("Працівників:", ref txtPracivnyky, y); y += step;
-            AddLabelAndTextBox("Річний дохід (грн):", ref txtDohid, y); y += step;
-            AddLabelAndTextBox("Тип ферми:", ref txtTyp, y); y += step + 10;
+            // Поля вводу
+            this.Controls.Add(new Label() { Text = "Назва:", Top = y, Left = 20 });
+            txtNazva = new TextBox() { Top = y, Left = 150, Width = 200 };
+            this.Controls.Add(txtNazva);
 
+            y += step;
+            this.Controls.Add(new Label() { Text = "Власник:", Top = y, Left = 20 });
+            txtVlasnyk = new TextBox() { Top = y, Left = 150, Width = 200 };
+            this.Controls.Add(txtVlasnyk);
+
+            y += step;
+            this.Controls.Add(new Label() { Text = "Площа (га):", Top = y, Left = 20 });
+            txtPloshcha = new TextBox() { Top = y, Left = 150, Width = 200 };
+            this.Controls.Add(txtPloshcha);
+
+            y += step;
+            this.Controls.Add(new Label() { Text = "Кількість тварин:", Top = y, Left = 20 });
+            txtTvaryny = new TextBox() { Top = y, Left = 150, Width = 200 };
+            this.Controls.Add(txtTvaryny);
+
+            y += step;
+            this.Controls.Add(new Label() { Text = "Працівників:", Top = y, Left = 20 });
+            txtPracivnyky = new TextBox() { Top = y, Left = 150, Width = 200 };
+            this.Controls.Add(txtPracivnyky);
+
+            y += step;
+            this.Controls.Add(new Label() { Text = "Річний дохід (грн):", Top = y, Left = 20 });
+            txtDohid = new TextBox() { Top = y, Left = 150, Width = 200 };
+            this.Controls.Add(txtDohid);
+
+            y += step;
+            this.Controls.Add(new Label() { Text = "Тип ферми:", Top = y, Left = 20 });
+            txtTyp = new TextBox() { Top = y, Left = 150, Width = 200 };
+            this.Controls.Add(txtTyp);
+
+            y += step + 10;
             btnCreate = new Button()
             {
                 Text = "Створити об'єкт і зберегти",
                 Top = y,
                 Left = 100,
-                Width = 200,
-                BackColor = Color.LightGreen
+                Width = 180
             };
             btnCreate.Click += BtnCreate_Click;
             this.Controls.Add(btnCreate);
@@ -113,32 +133,12 @@ namespace FermaApp
                 Left = 20,
                 Width = 350,
                 Height = 150,
-                BorderStyle = BorderStyle.FixedSingle,
-                BackColor = Color.White
+                BorderStyle = BorderStyle.FixedSingle
             };
             this.Controls.Add(lblResult);
         }
 
-        private void AddLabelAndTextBox(string labelText, ref TextBox txt, int top)
-        {
-            Label lbl = new Label()
-            {
-                Text = labelText,
-                Top = top + 5,
-                Left = 20,
-                Width = 120
-            };
-            this.Controls.Add(lbl);
-
-            txt = new TextBox()
-            {
-                Top = top,
-                Left = 150,
-                Width = 220
-            };
-            this.Controls.Add(txt);
-        }
-
+        // 🔹 Подія натискання кнопки
         private void BtnCreate_Click(object sender, EventArgs e)
         {
             try
@@ -152,7 +152,7 @@ namespace FermaApp
                 f.RichnyiDohid = double.Parse(txtDohid.Text);
                 f.TypFerma = txtTyp.Text;
 
-                // 🔹 Збереження у файл
+                // Зберегти у файл
                 string data = $"Назва: {f.Nazva}\n" +
                               $"Власник: {f.Vlasnyk}\n" +
                               $"Площа: {f.Ploshcha} га\n" +
@@ -160,9 +160,10 @@ namespace FermaApp
                               $"Працівників: {f.KilkistPracivnykiv}\n" +
                               $"Річний дохід: {f.RichnyiDohid} грн\n" +
                               $"Тип ферми: {f.TypFerma}\n";
+
                 File.WriteAllText("ferma.txt", data);
 
-                // 🔹 Виклик методів
+                // Виклик методів
                 double dohidNaPracivnyka = f.DohidNaPracivnyka();
                 double shylnist = f.ShylnistTvaryn();
                 f.ZbilshytyDohid(10);
@@ -171,12 +172,11 @@ namespace FermaApp
                     $"✅ Об'єкт створено та збережено у ferma.txt\n\n" +
                     $"Дохід на працівника: {dohidNaPracivnyka:F2} грн\n" +
                     $"Щільність тварин: {shylnist:F2} гол/га\n" +
-                    $"Новий дохід (+10%): {f.RichnyiDohid:F2} грн";
+                    $"Новий дохід (після +10%): {f.RichnyiDohid:F2} грн";
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Помилка введення даних: " + ex.Message, "Помилка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Помилка введення даних: " + ex.Message);
             }
         }
 
@@ -184,12 +184,7 @@ namespace FermaApp
         public static void Main()
         {
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
         }
-
-        private string GetDebuggerDisplay()
-        {
-            return ToString();
-        }
     }
+}
