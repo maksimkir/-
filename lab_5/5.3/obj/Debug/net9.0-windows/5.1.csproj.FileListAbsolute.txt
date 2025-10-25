@@ -1,0 +1,5 @@
+C:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.3\obj\Debug\net9.0-windows\5.1.GeneratedMSBuildEditorConfig.editorconfig
+C:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.3\obj\Debug\net9.0-windows\5.1.AssemblyInfoInputs.cache
+C:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.3\obj\Debug\net9.0-windows\5.1.AssemblyInfo.cs
+C:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.3\obj\Debug\net9.0-windows\5.1.csproj.CoreCompileInputs.cache
+C:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.3\obj\Debug\net9.0-windows\5.1.sourcelink.json
