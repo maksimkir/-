@@ -3,13 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-// Simple WinForms calculator app that meets lab requirements:
-// - GUI application
-// - Input data read from file (numbers, one per line)
-// - Results shown in window and exported to file
-// - Session logging in "Session log.txt"
-// - Buttons: Import, Choose op, Compute, Export, Close
-
 namespace LabCalculator
 {
     static class Program
@@ -196,7 +189,6 @@ namespace LabCalculator
             }
             if (op.StartsWith("^")) return Math.Pow(value, operand);
 
-            // Fallback: addition
             return value + operand;
         }
 

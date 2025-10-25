@@ -4,10 +4,8 @@ using System.Text;
 
 namespace LabWorkGUI
 {
-    // --- Базовий Клас: Фотоапарат ---
     public abstract class Фотоапарат
     {
-        // Поля (закриті, доступ через protected для спадкоємців)
         protected string модель;
         protected double zoom;
         protected string матеріалКорпусу;
@@ -25,27 +23,23 @@ namespace LabWorkGUI
             this.матеріалКорпусу = матеріалКорпусу.ToLower();
         }
 
-        // Метод 1: Вартість (віртуальний)
         public virtual double Вартість()
         {
             double baseCost = (zoom + 2) * (матеріалКорпусу == "пластик" ? 10 : 15);
             return baseCost;
         }
 
-        // Метод 2: Дорогий
         public bool Дорогий()
         {
             return Вартість() > 200;
         }
 
-        // Метод 3: Інформація
         public virtual string Інформація()
         {
             return $"Модель: {модель}, Zoom: {zoom:F1}, Вартість: {Вартість():F2} $";
         }
     }
 
-    // --- Похідний Клас 1: Цифровий Фотоапарат (Спадкоємець Фотоапарат) ---
     public class ЦифровийФотоапарат : Фотоапарат
     {
         protected int мегапікселі;
@@ -57,29 +51,23 @@ namespace LabWorkGUI
                 throw new ArgumentOutOfRangeException("мегапікселі", "Кількість мегапікселів має бути більше нуля.");
             this.мегапікселі = мегапікселі;
         }
-
-        // Перевизначення Вартість
         public override double Вартість()
         {
             return base.Вартість() * мегапікселі;
         }
 
-        // Новий метод: Оновлення моделі
         public void ОновленняМоделі()
         {
             мегапікселі += 2;
         }
-        
-        // Перевизначення Інформація
+
         public override string Інформація()
         {
-            // Викликаємо базовий Інформація, але додаємо мегапікселі
             string baseInfo = ((Фотоапарат)this).Інформація(); 
             return $"{baseInfo}, Мегапікселі: {мегапікселі} MP, Дорогий: {Дорогий()}";
         }
     }
 
-    // --- Похідний Клас 2: Камера (Спадкоємець ЦифровийФотоапарат) ---
     public class Камера : ЦифровийФотоапарат
     {
         private string типКамери;
@@ -90,7 +78,6 @@ namespace LabWorkGUI
             this.типКамери = типКамери;
         }
 
-        // Перевизначення Вартість
         public override double Вартість()
         {
             // Вартість = Базова вартість Фотоапарата * Мегапікселі * 10
@@ -98,13 +85,11 @@ namespace LabWorkGUI
             return baseCameraCost * мегапікселі * 10;
         }
 
-        // Перевизначення методу "Оновлення моделі"
         public new void ОновленняМоделі()
         {
-            мегапікселі += 20; // Збільшення на 20, а не на 2
+            мегапікселі += 20; 
         }
-        
-        // Перевизначення Інформація
+
         public override string Інформація()
         {
              // Викликаємо інформацію від Цифрового фотоапарата, але додаємо тип камери
@@ -112,36 +97,31 @@ namespace LabWorkGUI
         }
     }
 
-    // -----------------------------------------------------------
-    // --- ГЛАВНИЙ МОДУЛЬ: ФОРМА (GUI) ---
-    // -----------------------------------------------------------
-
     public partial class Form1 : Form
     {
-        // Об'єкти класів, оголошені на рівні форми
+
         private Фотоапарат camera;
         private ЦифровийФотоапарат digitalCamera;
         private Камера camcorder;
 
         public Form1()
         {
-            // Цей метод знаходиться в Form1.Designer.cs
+
             InitializeComponent(); 
-            btnUpdate.Enabled = false; // Початково неактивна
+            btnUpdate.Enabled = false;
         }
 
         private void btnCreateObjects_Click(object sender, EventArgs e)
         {
             try
             {
-                // Ввід даних з GUI елементів
+
                 string model = txtInputModel.Text;
                 double zoom = double.Parse(txtInputZoom.Text);
                 string material = txtInputMaterial.Text;
                 int megapixels = int.Parse(txtInputMegapixels.Text);
                 string camcorderType = txtInputCamcorderType.Text;
 
-                // Створення об'єктів з передачею параметрів у конструктори
                 camera = new Фотоапарат(model + " (Базовий)", zoom, material);
                 digitalCamera = new ЦифровийФотоапарат(model + " (Цифровий)", zoom, material, megapixels);
                 camcorder = new Камера(model + " (Камера)", zoom, material, megapixels, camcorderType);
@@ -187,7 +167,6 @@ namespace LabWorkGUI
         {
             if (camera == null) return;
 
-            // Оновлення об'єктів
             digitalCamera.ОновленняМоделі(); 
             camcorder.ОновленняМоделі();    
 

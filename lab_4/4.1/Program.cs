@@ -18,19 +18,7 @@ namespace ZooFinder
 
     public class MainForm : Form
     {
-        // Статичний набір полів (кількість параметрів):
-        // 0 - AnimalName (назва тварини)
-        // 1 - SpeciesCount (кількість виду)
-        // 2 - PostalCode (поштовий індекс)
-        // 3 - Country
-        // 4 - Region (область)
-        // 5 - District (район)
-        // 6 - City (місто)
-        // 7 - Street (вулиця)
-        // 8 - House (будинок)
-        // 9 - Apartment (квартира)
-        // 10 - TotalAnimals (загальна кількість тварин)
-        // 11 - Employees (кількість працівників)
+        
         const int COLUMNS = 12;
 
         private Button btnLoad;

@@ -6,7 +6,6 @@ namespace FermaApp
 {
     public class Ferma
     {
-        // 🔹 Закриті поля
         private string nazva;
         private string vlasnyk;
         private double ploshcha;
@@ -15,7 +14,6 @@ namespace FermaApp
         private double richnyiDohid;
         private string typFerma;
 
-        // 🔹 Властивості
         public string Nazva { get => nazva; set => nazva = value; }
         public string Vlasnyk { get => vlasnyk; set => vlasnyk = value; }
         public double Ploshcha { get => ploshcha; set => ploshcha = value; }
@@ -24,7 +22,6 @@ namespace FermaApp
         public double RichnyiDohid { get => richnyiDohid; set => richnyiDohid = value; }
         public string TypFerma { get => typFerma; set => typFerma = value; }
 
-        // 🔹 Конструктор без параметрів
         public Ferma()
         {
             nazva = "Невідома";
@@ -36,7 +33,6 @@ namespace FermaApp
             typFerma = "Невідомий";
         }
 
-        // 🔹 Методи класу
         public double DohidNaPracivnyka()
         {
             if (kilkistPracivnykiv == 0) return 0;
@@ -57,14 +53,13 @@ namespace FermaApp
 
     public class MainForm : Form
     {
-        // 🔹 Елементи інтерфейсу
         private TextBox txtNazva, txtVlasnyk, txtPloshcha, txtTvaryny, txtPracivnyky, txtDohid, txtTyp;
         private Button btnCreate;
         private Label lblResult;
 
         public MainForm()
         {
-            this.Text = "Ферма;
+            this.Text = "Ферма - Введення даних";
             this.Width = 400;
             this.Height = 520;
 
@@ -138,7 +133,6 @@ namespace FermaApp
             this.Controls.Add(lblResult);
         }
 
-        // 🔹 Подія натискання кнопки
         private void BtnCreate_Click(object sender, EventArgs e)
         {
             try
@@ -152,7 +146,6 @@ namespace FermaApp
                 f.RichnyiDohid = double.Parse(txtDohid.Text);
                 f.TypFerma = txtTyp.Text;
 
-                // Зберегти у файл
                 string data = $"Назва: {f.Nazva}\n" +
                               $"Власник: {f.Vlasnyk}\n" +
                               $"Площа: {f.Ploshcha} га\n" +
@@ -163,7 +156,6 @@ namespace FermaApp
 
                 File.WriteAllText("ferma.txt", data);
 
-                // Виклик методів
                 double dohidNaPracivnyka = f.DohidNaPracivnyka();
                 double shylnist = f.ShylnistTvaryn();
                 f.ZbilshytyDohid(10);
