@@ -1,2 +1,4 @@
 dotnet --version
 dotnet new console
+
+dotnet run --project "4.3"
