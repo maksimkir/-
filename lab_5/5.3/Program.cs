@@ -1,177 +1,286 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Text;
 
-namespace LabWorkGUI
+namespace PhotoApp
 {
-    public abstract class Фотоапарат
+    public partial class MainForm : Form
     {
-        protected string модель;
-        protected double zoom;
-        protected string матеріалКорпусу;
+        PhotoCamera photo;
+        DigitalCamera digital;
+        Camera camera;
 
-        // Конструктор
-        public Фотоапарат(string модель, double zoom, string матеріалКорпусу)
+        public MainForm()
         {
-            if (zoom < 1 || zoom > 35)
-                throw new ArgumentOutOfRangeException("Zoom", "Zoom має бути в межах від 1 до 35.");
-            if (матеріалКорпусу.ToLower() != "метал" && матеріалКорпусу.ToLower() != "пластик")
-                throw new ArgumentException("Матеріал корпусу має бути 'метал' або 'пластик'.", "матеріалКорпусу");
-
-            this.модель = модель;
-            this.zoom = zoom;
-            this.матеріалКорпусу = матеріалКорпусу.ToLower();
+            InitializeComponent();
         }
 
-        public virtual double Вартість()
-        {
-            double baseCost = (zoom + 2) * (матеріалКорпусу == "пластик" ? 10 : 15);
-            return baseCost;
-        }
-
-        public bool Дорогий()
-        {
-            return Вартість() > 200;
-        }
-
-        public virtual string Інформація()
-        {
-            return $"Модель: {модель}, Zoom: {zoom:F1}, Вартість: {Вартість():F2} $";
-        }
-    }
-
-    public class ЦифровийФотоапарат : Фотоапарат
-    {
-        protected int мегапікселі;
-
-        public ЦифровийФотоапарат(string модель, double zoom, string матеріалКорпусу, int мегапікселі)
-            : base(модель, zoom, матеріалКорпусу)
-        {
-            if (мегапікселі <= 0)
-                throw new ArgumentOutOfRangeException("мегапікселі", "Кількість мегапікселів має бути більше нуля.");
-            this.мегапікселі = мегапікселі;
-        }
-        public override double Вартість()
-        {
-            return base.Вартість() * мегапікселі;
-        }
-
-        public void ОновленняМоделі()
-        {
-            мегапікселі += 2;
-        }
-
-        public override string Інформація()
-        {
-            string baseInfo = ((Фотоапарат)this).Інформація(); 
-            return $"{baseInfo}, Мегапікселі: {мегапікселі} MP, Дорогий: {Дорогий()}";
-        }
-    }
-
-    public class Камера : ЦифровийФотоапарат
-    {
-        private string типКамери;
-
-        public Камера(string модель, double zoom, string матеріалКорпусу, int мегапікселі, string типКамери)
-            : base(модель, zoom, матеріалКорпусу, мегапікселі)
-        {
-            this.типКамери = типКамери;
-        }
-
-        public override double Вартість()
-        {
-            // Вартість = Базова вартість Фотоапарата * Мегапікселі * 10
-            double baseCameraCost = ((Фотоапарат)this).Вартість(); 
-            return baseCameraCost * мегапікселі * 10;
-        }
-
-        public new void ОновленняМоделі()
-        {
-            мегапікселі += 20; 
-        }
-
-        public override string Інформація()
-        {
-             // Викликаємо інформацію від Цифрового фотоапарата, але додаємо тип камери
-            return $"{base.Інформація()}, Тип камери: {типКамери}";
-        }
-    }
-
-    public partial class Form1 : Form
-    {
-
-        private Фотоапарат camera;
-        private ЦифровийФотоапарат digitalCamera;
-        private Камера camcorder;
-
-        public Form1()
-        {
-
-            InitializeComponent(); 
-            btnUpdate.Enabled = false;
-        }
-
-        private void btnCreateObjects_Click(object sender, EventArgs e)
+        private void buttonCreate_Click(object sender, EventArgs e)
         {
             try
             {
+                string model = textBoxModel.Text;
+                double zoom = double.Parse(textBoxZoom.Text);
+                string material = comboBoxMaterial.Text;
+                int mp = int.Parse(textBoxMegaPixels.Text);
+                string type = textBoxType.Text;
 
-                string model = txtInputModel.Text;
-                double zoom = double.Parse(txtInputZoom.Text);
-                string material = txtInputMaterial.Text;
-                int megapixels = int.Parse(txtInputMegapixels.Text);
-                string camcorderType = txtInputCamcorderType.Text;
+                photo = new PhotoCamera(model, zoom, material);
+                digital = new DigitalCamera(model + "_D", zoom + 2, material, mp);
+                camera = new Camera(model + "_C", zoom + 5, material, mp + 5, type);
 
-                camera = new Фотоапарат(model + " (Базовий)", zoom, material);
-                digitalCamera = new ЦифровийФотоапарат(model + " (Цифровий)", zoom, material, megapixels);
-                camcorder = new Камера(model + " (Камера)", zoom, material, megapixels, camcorderType);
-
-                DisplayInformation(false);
-                btnUpdate.Enabled = true; 
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Помилка вводу: Zoom та Мегапікселі мають бути коректними числами.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show("Помилка вводу: " + ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxOutput.Text =
+                    "=== Початкова інформація ===" + Environment.NewLine +
+                    photo.Info() + Environment.NewLine +
+                    digital.Info() + Environment.NewLine +
+                    camera.Info();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Невідома помилка: " + ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Помилка: " + ex.Message);
             }
         }
 
-        private void DisplayInformation(bool isUpdate)
+        private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine(isUpdate ? "--- ОНОВЛЕНА ІНФОРМАЦІЯ ---" : "--- ПОЧАТКОВА ІНФОРМАЦІЯ ПРО ОБ'ЄКТИ ---");
-
-            // Виведення інформації
-            sb.AppendLine($"[Фотоапарат]: {camera.Інформація()}");
-            sb.AppendLine($"[Цифровий Фотоапарат]: {digitalCamera.Інформація()}");
-            sb.AppendLine($"[Камера]: {camcorder.Інформація()}");
-            
-            if (isUpdate)
+            if (photo == null)
             {
-                 txtOutput.AppendText(Environment.NewLine + sb.ToString());
+                MessageBox.Show("Спочатку створіть об’єкти!");
+                return;
             }
+
+            digital.UpdateModel();
+            camera.UpdateModel();
+
+            textBoxOutput.Text =
+                "=== Після оновлення моделей ===" + Environment.NewLine +
+                digital.Info() + Environment.NewLine +
+                camera.Info();
+        }
+
+        private void InitializeComponent()
+        {
+            this.label1 = new Label();
+            this.textBoxModel = new TextBox();
+            this.label2 = new Label();
+            this.textBoxZoom = new TextBox();
+            this.label3 = new Label();
+            this.comboBoxMaterial = new ComboBox();
+            this.label4 = new Label();
+            this.textBoxMegaPixels = new TextBox();
+            this.label5 = new Label();
+            this.textBoxType = new TextBox();
+            this.buttonCreate = new Button();
+            this.buttonUpdate = new Button();
+            this.textBoxOutput = new TextBox();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.Text = "Модель:";
+            this.label1.Location = new System.Drawing.Point(20, 20);
+            this.label1.AutoSize = true;
+            // 
+            // textBoxModel
+            // 
+            this.textBoxModel.Location = new System.Drawing.Point(120, 20);
+            this.textBoxModel.Width = 150;
+            // 
+            // label2
+            // 
+            this.label2.Text = "Zoom:";
+            this.label2.Location = new System.Drawing.Point(20, 60);
+            this.label2.AutoSize = true;
+            // 
+            // textBoxZoom
+            // 
+            this.textBoxZoom.Location = new System.Drawing.Point(120, 60);
+            this.textBoxZoom.Width = 150;
+            // 
+            // label3
+            // 
+            this.label3.Text = "Матеріал:";
+            this.label3.Location = new System.Drawing.Point(20, 100);
+            this.label3.AutoSize = true;
+            // 
+            // comboBoxMaterial
+            // 
+            this.comboBoxMaterial.Location = new System.Drawing.Point(120, 100);
+            this.comboBoxMaterial.Width = 150;
+            this.comboBoxMaterial.Items.AddRange(new object[] { "пластик", "метал" });
+            // 
+            // label4
+            // 
+            this.label4.Text = "Мегапікселі:";
+            this.label4.Location = new System.Drawing.Point(20, 140);
+            this.label4.AutoSize = true;
+            // 
+            // textBoxMegaPixels
+            // 
+            this.textBoxMegaPixels.Location = new System.Drawing.Point(120, 140);
+            this.textBoxMegaPixels.Width = 150;
+            // 
+            // label5
+            // 
+            this.label5.Text = "Тип камери:";
+            this.label5.Location = new System.Drawing.Point(20, 180);
+            this.label5.AutoSize = true;
+            // 
+            // textBoxType
+            // 
+            this.textBoxType.Location = new System.Drawing.Point(120, 180);
+            this.textBoxType.Width = 150;
+            // 
+            // buttonCreate
+            // 
+            this.buttonCreate.Text = "Створити об’єкти";
+            this.buttonCreate.Location = new System.Drawing.Point(20, 230);
+            this.buttonCreate.Width = 120;
+            this.buttonCreate.Click += new EventHandler(this.buttonCreate_Click);
+            // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.Text = "Оновити моделі";
+            this.buttonUpdate.Location = new System.Drawing.Point(150, 230);
+            this.buttonUpdate.Width = 120;
+            this.buttonUpdate.Click += new EventHandler(this.buttonUpdate_Click);
+            // 
+            // textBoxOutput
+            // 
+            this.textBoxOutput.Location = new System.Drawing.Point(20, 270);
+            this.textBoxOutput.Width = 400;
+            this.textBoxOutput.Height = 200;
+            this.textBoxOutput.Multiline = true;
+            this.textBoxOutput.ScrollBars = ScrollBars.Vertical;
+            // 
+            // MainForm
+            // 
+            this.ClientSize = new System.Drawing.Size(450, 500);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBoxModel);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.textBoxZoom);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.comboBoxMaterial);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textBoxMegaPixels);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.textBoxType);
+            this.Controls.Add(this.buttonCreate);
+            this.Controls.Add(this.buttonUpdate);
+            this.Controls.Add(this.textBoxOutput);
+            this.Text = "Фотоапарати – лабораторна робота";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+        }
+
+        private Label label1;
+        private TextBox textBoxModel;
+        private Label label2;
+        private TextBox textBoxZoom;
+        private Label label3;
+        private ComboBox comboBoxMaterial;
+        private Label label4;
+        private TextBox textBoxMegaPixels;
+        private Label label5;
+        private TextBox textBoxType;
+        private Button buttonCreate;
+        private Button buttonUpdate;
+        private TextBox textBoxOutput;
+    }
+
+    // ---------- Класи ----------
+    public class PhotoCamera
+    {
+        public string Model { get; set; }
+        public double Zoom { get; set; }
+        public string Material { get; set; }
+
+        public PhotoCamera(string model, double zoom, string material)
+        {
+            Model = model;
+            Zoom = zoom;
+            Material = material.ToLower();
+        }
+
+        public virtual double Cost()
+        {
+            if (Material == "пластик")
+                return (Zoom + 2) * 10;
             else
-            {
-                txtOutput.Text = sb.ToString();
-            }
+                return (Zoom + 2) * 15;
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        public bool IsExpensive()
         {
-            if (camera == null) return;
+            return Cost() > 200;
+        }
 
-            digitalCamera.ОновленняМоделі(); 
-            camcorder.ОновленняМоделі();    
+        public virtual string Info()
+        {
+            return $"Модель: {Model}, Zoom: {Zoom}, Матеріал: {Material}, Вартість: {Cost()}$, Дорогий: {IsExpensive()}";
+        }
+    }
 
-            // Вивід оновленої інформації
-            DisplayInformation(true);
+    public class DigitalCamera : PhotoCamera
+    {
+        public int MegaPixels { get; set; }
+
+        public DigitalCamera(string model, double zoom, string material, int megaPixels)
+            : base(model, zoom, material)
+        {
+            MegaPixels = megaPixels;
+        }
+
+        public override double Cost()
+        {
+            return base.Cost() * MegaPixels;
+        }
+
+        public void UpdateModel()
+        {
+            MegaPixels += 2;
+        }
+
+        public override string Info()
+        {
+            return $"[Цифровий] Модель: {Model}, Zoom: {Zoom}, Матеріал: {Material}, МП: {MegaPixels}, Вартість: {Cost()}$, Дорогий: {IsExpensive()}";
+        }
+    }
+
+    public class Camera : DigitalCamera
+    {
+        public string Type { get; set; }
+
+        public Camera(string model, double zoom, string material, int megaPixels, string type)
+            : base(model, zoom, material, megaPixels)
+        {
+            Type = type;
+        }
+
+        public override double Cost()
+        {
+            return base.Cost() * 10;
+        }
+
+        public new void UpdateModel()
+        {
+            MegaPixels += 20;
+        }
+
+        public override string Info()
+        {
+            return $"[Камера] Модель: {Model}, Zoom: {Zoom}, Матеріал: {Material}, МП: {MegaPixels}, Тип: {Type}, Вартість: {Cost()}$, Дорогий: {IsExpensive()}";
+        }
+    }
+
+    // ---------- Точка входу ----------
+    static class Program
+    {
+        [STAThread]
+        static void Main()
+        {
+            ApplicationConfiguration.Initialize();
+            Application.Run(new MainForm());
         }
     }
 }

@@ -65,7 +65,7 @@ namespace ZooFinder
 
         private void SetupGridColumns(DataGridView grid)
         {
-            grid.Columns.Clear();
+            grd.Columns.Clear();
             grid.Columns.Add("AnimalName", "Назва тварини");
             grid.Columns.Add("SpeciesCount", "Кількість виду");
             grid.Columns.Add("PostalCode", "Поштовий індекс");

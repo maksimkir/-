@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RSameynpnnk=",
+  "dgSpecHash": "SR68ageR8zg=",
   "success": true,
-  "projectFilePath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_5\\5.3\\5.3.csproj",
+  "projectFilePath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_5\\5.3\\3.1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.10\\microsoft.netcore.app.ref.9.0.10.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.10\\microsoft.windowsdesktop.app.ref.9.0.10.nupkg.sha512",

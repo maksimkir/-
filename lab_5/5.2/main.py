@@ -3,9 +3,6 @@ from tkinter import ttk, messagebox
 import atexit
 import sys
 
-
-# -------------------- 1. Ієрархія Класів (ВИПРАВЛЕНО: Класи йдуть ПЕРШИМИ) --------------------
-
 class Examination:
     """Базовий клас для всіх видів випробувань."""
 
@@ -111,9 +108,6 @@ class GraduationExam(Exam):
         print(f"Захист дипломної: {'Так' if self.is_thesis_defence else 'Ні'}")
         return f"{base_info}, Захист: {'Так' if self.is_thesis_defence else 'Ні'}, Члени комісії: {self.board_members}"
 
-
-# -------------------- 2. GUI (Tkinter) --------------------
-
 class ExaminationApp:
     def __init__(self, root):
         self.root = root
@@ -123,7 +117,6 @@ class ExaminationApp:
         self.create_widgets()
 
     def create_widgets(self):
-        # ------------------- Секція Вводу -------------------
         input_frame = ttk.LabelFrame(self.root, text="Ввід даних та Створення Об'єкта")
         input_frame.pack(padx=10, pady=10, fill="x")
 
@@ -149,7 +142,6 @@ class ExaminationApp:
         btn_create = ttk.Button(input_frame, text="1. Створити Об'єкт (Конструктор)", command=self.create_object)
         btn_create.grid(row=3, column=0, columnspan=2, padx=5, pady=10, sticky="ew")
 
-        # ------------------- Секція Демонстрації Методів -------------------
 
         methods_frame = ttk.LabelFrame(self.root, text="Демонстрація методів")
         methods_frame.pack(padx=10, pady=5, fill="x")
@@ -168,7 +160,6 @@ class ExaminationApp:
                                  command=self.call_process_result)
         btn_process.grid(row=1, column=1, padx=5, pady=5, sticky="ew")
 
-        # ------------------- Секція Результатів -------------------
 
         output_frame = ttk.LabelFrame(self.root, text="Результати та Вивід (Show() виводить в консоль)")
         output_frame.pack(padx=10, pady=10, fill="both", expand=True)
@@ -187,7 +178,6 @@ class ExaminationApp:
             max_score = int(self.max_score_spin.get())
             test_type = self.type_combo.get()
 
-            # Створення об'єкта тепер працює, бо класи визначені вище
             if test_type == "Test":
                 self.current_object = Test(subject=subject, max_score=max_score, question_count=15)
             elif test_type == "Exam":

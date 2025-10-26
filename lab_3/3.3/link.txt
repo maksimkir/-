@@ -1,0 +1,26 @@
+link for gui:
+http://www.chnu.cv.ua
+https://student.cv.ua
+www.library.cv.ua
+portal.cv.ua/news
+test.subdomain.cv.ua/path/to/page
+https://www.info.cv.ua/info
+
+
+4. Методи класу
+4.1. find_matches
+Знаходить всі унікальні адреси .cv.ua у тексті.
+Відображає їх у списку.
+Оновлює лічильник.
+4.2. on_select
+Виділяє вибраний адрес у тексті жовтим кольором.
+4.3. get_selected_match
+Повертає вибраний елемент зі списку.
+4.4delete_selected
+Видаляє перше входження вибраного адреса з тексту.
+4.5delete_all
+Видаляє всі знайдені адреси з тексту.
+4.6replace_selected
+Замінює перше входження вибраного адреса на введене значення.
+4.7. replace_all
+Замінює всі знайдені адреси на введене значення.
