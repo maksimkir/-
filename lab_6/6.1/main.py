@@ -78,7 +78,7 @@ class Kvity(Roslyna):
     """Похідний клас Квіти."""
 
     def __init__(self, nazva, latynska_nazva, mistse_zrostannya, u_chervoniy_knizi, kolir_pelyustok, tryvalist_zhyttya):
-        super().__init__(nazva, latynska_zrostannya, mistse_zrostannya, u_chervoniy_knizi)
+        super().__init__(nazva, mistse_zrostannya, u_chervoniy_knizi)
         self.kolir_pelyustok = kolir_pelyustok  # Власне поле
         self.tryvalist_zhyttya = tryvalist_zhyttya  # Власне поле ("однорічна", "багаторічна")
 
