@@ -73,87 +73,59 @@ namespace PhotoApp
             this.buttonUpdate = new Button();
             this.textBoxOutput = new TextBox();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
+            
             this.label1.Text = "Модель:";
             this.label1.Location = new System.Drawing.Point(20, 20);
             this.label1.AutoSize = true;
-            // 
-            // textBoxModel
-            // 
+            
             this.textBoxModel.Location = new System.Drawing.Point(120, 20);
             this.textBoxModel.Width = 150;
-            // 
-            // label2
-            // 
+            
             this.label2.Text = "Zoom:";
             this.label2.Location = new System.Drawing.Point(20, 60);
             this.label2.AutoSize = true;
-            // 
-            // textBoxZoom
-            // 
+            
             this.textBoxZoom.Location = new System.Drawing.Point(120, 60);
             this.textBoxZoom.Width = 150;
-            // 
-            // label3
-            // 
+
             this.label3.Text = "Матеріал:";
             this.label3.Location = new System.Drawing.Point(20, 100);
             this.label3.AutoSize = true;
-            // 
-            // comboBoxMaterial
-            // 
+            
             this.comboBoxMaterial.Location = new System.Drawing.Point(120, 100);
             this.comboBoxMaterial.Width = 150;
             this.comboBoxMaterial.Items.AddRange(new object[] { "пластик", "метал" });
-            // 
-            // label4
-            // 
+            
             this.label4.Text = "Мегапікселі:";
             this.label4.Location = new System.Drawing.Point(20, 140);
             this.label4.AutoSize = true;
-            // 
-            // textBoxMegaPixels
-            // 
+           
             this.textBoxMegaPixels.Location = new System.Drawing.Point(120, 140);
             this.textBoxMegaPixels.Width = 150;
-            // 
-            // label5
-            // 
+           
             this.label5.Text = "Тип камери:";
             this.label5.Location = new System.Drawing.Point(20, 180);
             this.label5.AutoSize = true;
-            // 
-            // textBoxType
-            // 
+        
             this.textBoxType.Location = new System.Drawing.Point(120, 180);
             this.textBoxType.Width = 150;
-            // 
-            // buttonCreate
-            // 
+           
             this.buttonCreate.Text = "Створити об’єкти";
             this.buttonCreate.Location = new System.Drawing.Point(20, 230);
             this.buttonCreate.Width = 120;
             this.buttonCreate.Click += new EventHandler(this.buttonCreate_Click);
-            // 
-            // buttonUpdate
-            // 
+            
             this.buttonUpdate.Text = "Оновити моделі";
             this.buttonUpdate.Location = new System.Drawing.Point(150, 230);
             this.buttonUpdate.Width = 120;
             this.buttonUpdate.Click += new EventHandler(this.buttonUpdate_Click);
-            // 
-            // textBoxOutput
-            // 
+            
             this.textBoxOutput.Location = new System.Drawing.Point(20, 270);
             this.textBoxOutput.Width = 400;
             this.textBoxOutput.Height = 200;
             this.textBoxOutput.Multiline = true;
             this.textBoxOutput.ScrollBars = ScrollBars.Vertical;
-            // 
-            // MainForm
-            // 
+            
             this.ClientSize = new System.Drawing.Size(450, 500);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxModel);
@@ -188,7 +160,7 @@ namespace PhotoApp
         private TextBox textBoxOutput;
     }
 
-    // ---------- Класи ----------
+
     public class PhotoCamera
     {
         public string Model { get; set; }
@@ -273,7 +245,6 @@ namespace PhotoApp
         }
     }
 
-    // ---------- Точка входу ----------
     static class Program
     {
         [STAThread]
