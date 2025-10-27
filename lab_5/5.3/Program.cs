@@ -29,14 +29,14 @@ namespace PhotoApp
                 camera = new Camera(model + "_C", zoom + 5, material, mp + 5, type);
 
                 textBoxOutput.Text =
-                    "=== Початкова інформація ===" + Environment.NewLine +
+                    "=== Initial Information ===" + Environment.NewLine +
                     photo.Info() + Environment.NewLine +
                     digital.Info() + Environment.NewLine +
                     camera.Info();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Помилка: " + ex.Message);
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
 
@@ -44,7 +44,7 @@ namespace PhotoApp
         {
             if (photo == null)
             {
-                MessageBox.Show("Спочатку створіть об’єкти!");
+                MessageBox.Show("Please create the objects first!");
                 return;
             }
 
@@ -52,7 +52,7 @@ namespace PhotoApp
             camera.UpdateModel();
 
             textBoxOutput.Text =
-                "=== Після оновлення моделей ===" + Environment.NewLine +
+                "=== After Model Update ===" + Environment.NewLine +
                 digital.Info() + Environment.NewLine +
                 camera.Info();
         }
@@ -74,7 +74,7 @@ namespace PhotoApp
             this.textBoxOutput = new TextBox();
             this.SuspendLayout();
             
-            this.label1.Text = "Модель:";
+            this.label1.Text = "Model:";
             this.label1.Location = new System.Drawing.Point(20, 20);
             this.label1.AutoSize = true;
             
@@ -88,34 +88,34 @@ namespace PhotoApp
             this.textBoxZoom.Location = new System.Drawing.Point(120, 60);
             this.textBoxZoom.Width = 150;
 
-            this.label3.Text = "Матеріал:";
+            this.label3.Text = "Material:";
             this.label3.Location = new System.Drawing.Point(20, 100);
             this.label3.AutoSize = true;
             
             this.comboBoxMaterial.Location = new System.Drawing.Point(120, 100);
             this.comboBoxMaterial.Width = 150;
-            this.comboBoxMaterial.Items.AddRange(new object[] { "пластик", "метал" });
+            this.comboBoxMaterial.Items.AddRange(new object[] { "plastic", "metal" });
             
-            this.label4.Text = "Мегапікселі:";
+            this.label4.Text = "Megapixels:";
             this.label4.Location = new System.Drawing.Point(20, 140);
             this.label4.AutoSize = true;
            
             this.textBoxMegaPixels.Location = new System.Drawing.Point(120, 140);
             this.textBoxMegaPixels.Width = 150;
            
-            this.label5.Text = "Тип камери:";
+            this.label5.Text = "Camera type:";
             this.label5.Location = new System.Drawing.Point(20, 180);
             this.label5.AutoSize = true;
         
             this.textBoxType.Location = new System.Drawing.Point(120, 180);
             this.textBoxType.Width = 150;
            
-            this.buttonCreate.Text = "Створити об’єкти";
+            this.buttonCreate.Text = "Create Objects";
             this.buttonCreate.Location = new System.Drawing.Point(20, 230);
             this.buttonCreate.Width = 120;
             this.buttonCreate.Click += new EventHandler(this.buttonCreate_Click);
             
-            this.buttonUpdate.Text = "Оновити моделі";
+            this.buttonUpdate.Text = "Update Models";
             this.buttonUpdate.Location = new System.Drawing.Point(150, 230);
             this.buttonUpdate.Width = 120;
             this.buttonUpdate.Click += new EventHandler(this.buttonUpdate_Click);
@@ -140,7 +140,7 @@ namespace PhotoApp
             this.Controls.Add(this.buttonCreate);
             this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.textBoxOutput);
-            this.Text = "Фотоапарати – лабораторна робота";
+            this.Text = "Cameras – Lab Work";
             this.ResumeLayout(false);
             this.PerformLayout();
         }
@@ -176,7 +176,7 @@ namespace PhotoApp
 
         public virtual double Cost()
         {
-            if (Material == "пластик")
+            if (Material == "plastic")
                 return (Zoom + 2) * 10;
             else
                 return (Zoom + 2) * 15;
@@ -189,7 +189,7 @@ namespace PhotoApp
 
         public virtual string Info()
         {
-            return $"Модель: {Model}, Zoom: {Zoom}, Матеріал: {Material}, Вартість: {Cost()}$, Дорогий: {IsExpensive()}";
+            return $"Model: {Model}, Zoom: {Zoom}, Material: {Material}, Price: {Cost()}$, Expensive: {IsExpensive()}";
         }
     }
 
@@ -215,7 +215,7 @@ namespace PhotoApp
 
         public override string Info()
         {
-            return $"[Цифровий] Модель: {Model}, Zoom: {Zoom}, Матеріал: {Material}, МП: {MegaPixels}, Вартість: {Cost()}$, Дорогий: {IsExpensive()}";
+            return $"[Digital] Model: {Model}, Zoom: {Zoom}, Material: {Material}, MP: {MegaPixels}, Price: {Cost()}$, Expensive: {IsExpensive()}";
         }
     }
 
@@ -241,7 +241,7 @@ namespace PhotoApp
 
         public override string Info()
         {
-            return $"[Камера] Модель: {Model}, Zoom: {Zoom}, Матеріал: {Material}, МП: {MegaPixels}, Тип: {Type}, Вартість: {Cost()}$, Дорогий: {IsExpensive()}";
+            return $"[Camera] Model: {Model}, Zoom: {Zoom}, Material: {Material}, MP: {MegaPixels}, Type: {Type}, Price: {Cost()}$, Expensive: {IsExpensive()}";
         }
     }
 

@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace AirTransportApp
 {
-    // === ІНТЕРФЕЙСИ ===
+  
     public interface IAirTransport
     {
         void Fly();
@@ -17,7 +17,6 @@ namespace AirTransportApp
         string EndRoute();
     }
 
-    // === КЛАС ВЕРТОЛІТ ===
     public class Helicopter : IAirTransport, IRoute
     {
         public string Name { get; set; }
@@ -37,7 +36,7 @@ namespace AirTransportApp
 
         public string GetInfo()
         {
-            return $"🚁 Вертоліт: {Name}\nШвидкість: {Speed} км/год\nДальність: {Range} км\nРотори: {HasRotors}";
+            return $"Вертоліт: {Name}\nШвидкість: {Speed} км/год\nДальність: {Range} км\nРотори: {HasRotors}";
         }
 
         public string StartRoute(string from, string to)
@@ -55,7 +54,6 @@ namespace AirTransportApp
         public string Hover() => "Вертоліт зависає у повітрі.";
     }
 
-    // === КЛАС ЛІТАК ===
     public class Airplane : IAirTransport, IRoute
     {
         public string Name { get; set; }
@@ -75,7 +73,7 @@ namespace AirTransportApp
 
         public string GetInfo()
         {
-            return $"✈️ Літак: {Name}\nШвидкість: {Speed} км/год\nДальність: {Range} км\nМісць: {PassengerCapacity}";
+            return $"Літак: {Name}\nШвидкість: {Speed} км/год\nДальність: {Range} км\nМісць: {PassengerCapacity}";
         }
 
         public string StartRoute(string from, string to)
@@ -93,7 +91,6 @@ namespace AirTransportApp
         public string Refuel() => "Літак дозаправлено.";
     }
 
-    // === ГОЛОВНА ФОРМА ===
     public class MainForm : Form
     {
         private ComboBox comboType;
@@ -110,7 +107,6 @@ namespace AirTransportApp
             Font = new Font("Segoe UI", 10);
             BackColor = Color.WhiteSmoke;
 
-            // Поле вибору типу
             comboType = new ComboBox
             {
                 Location = new Point(30, 30),
@@ -186,7 +182,6 @@ namespace AirTransportApp
         }
     }
 
-    // === ГОЛОВНИЙ ВХІД У ПРОГРАМУ ===
     internal static class Program
     {
         [STAThread]

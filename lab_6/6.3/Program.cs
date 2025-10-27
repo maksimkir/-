@@ -7,9 +7,7 @@ using System.Windows.Forms;
 
 namespace WorkersApp
 {
-    // =============================== //
-    // КЛАС "Робочий" (Worker)
-    // =============================== //
+    
     public class Worker : IComparable<Worker>
     {
         public string Name { get; set; }
@@ -23,7 +21,6 @@ namespace WorkersApp
             Salary = salary;
         }
 
-        // Реалізація інтерфейсу IComparable — порівняння за віком
         public int CompareTo(Worker other)
         {
             if (other == null) return 1;
@@ -36,9 +33,6 @@ namespace WorkersApp
         }
     }
 
-    // =============================== //
-    // ПОРІВНЮВАЧ (IComparer) — за зарплатою
-    // =============================== //
     public class WorkerSalaryComparer : IComparer<Worker>
     {
         public int Compare(Worker x, Worker y)
@@ -48,9 +42,6 @@ namespace WorkersApp
         }
     }
 
-    // =============================== //
-    // КОЛЕКЦІЯ РОБІТНИКІВ (IEnumerable)
-    // =============================== //
     public class WorkerCollection : IEnumerable<Worker>
     {
         private List<Worker> workers = new List<Worker>();
@@ -68,15 +59,15 @@ namespace WorkersApp
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        // Додаткові методи для сортування
+       
         public void SortByAge()
         {
-            workers.Sort(); // використовує IComparable
+            workers.Sort(); 
         }
 
         public void SortBySalary()
         {
-            workers.Sort(new WorkerSalaryComparer()); // використовує IComparer
+            workers.Sort(new WorkerSalaryComparer()); 
         }
 
         public override string ToString()
@@ -88,9 +79,6 @@ namespace WorkersApp
         }
     }
 
-    // =============================== //
-    // ГОЛОВНА ФОРМА GUI
-    // =============================== //
     public class MainForm : Form
     {
         private WorkerCollection workers = new WorkerCollection();
@@ -111,7 +99,6 @@ namespace WorkersApp
             Font = new Font("Segoe UI", 10);
             BackColor = Color.WhiteSmoke;
 
-            // Створюємо елементи GUI
             Label lbl1 = new Label { Text = "Ім'я:", Location = new Point(30, 30), AutoSize = true };
             txtName = new TextBox { Location = new Point(100, 25), Width = 150 };
 
@@ -163,7 +150,6 @@ namespace WorkersApp
                 AutoSize = false
             };
 
-            // Додаємо елементи на форму
             Controls.Add(lbl1);
             Controls.Add(lbl2);
             Controls.Add(lbl3);
@@ -217,9 +203,6 @@ namespace WorkersApp
         }
     }
 
-    // =============================== //
-    // ТОЧКА ВХОДУ (Main)
-    // =============================== //
     internal static class Program
     {
         [STAThread]
