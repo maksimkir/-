@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace WorkersApp
 {
     
-    public class Worker : IComparable<Worker>
+    public class Worker : IComparable<Worker>   
     {
         public string Name { get; set; }
         public int Age { get; set; }
@@ -95,7 +95,7 @@ namespace WorkersApp
         public MainForm()
         {
             Text = "Працівники — Лабораторна робота (IComparable, IComparer, IEnumerable)";
-            Size = new Size(700, 500);
+            Size = new Size(1000, 700);
             Font = new Font("Segoe UI", 10);
             BackColor = Color.WhiteSmoke;
 
@@ -138,7 +138,7 @@ namespace WorkersApp
             listWorkers = new ListBox
             {
                 Location = new Point(280, 25),
-                Size = new Size(380, 350),
+                Size = new Size(500, 350),
                 Font = new Font("Consolas", 10)
             };
 
