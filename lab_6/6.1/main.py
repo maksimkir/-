@@ -3,9 +3,6 @@ from tkinter import ttk, messagebox
 from abc import ABC, abstractmethod
 
 
-# =============================================================================
-# ЧАСТИНА 1: ІЄРАРХІЯ КЛАСІВ З ВИКОРИСТАННЯМ ABC
-# =============================================================================
 
 class Roslyna(ABC):
     """Абстрактний клас Рослина."""
@@ -14,10 +11,7 @@ class Roslyna(ABC):
         self.nazva = nazva
         self.latynska_nazva = latynska_nazva
         self.mistse_zrostannya = mistse_zrostannya
-        # Це поле буде True/False (використовуємо булеве значення)
         self.u_chervoniy_knizi = u_chervoniy_knizi
-
-        # Абстрактні методи (повинні бути реалізовані в похідних класах)
 
     @abstractmethod
     def kharakterystyka_vydu(self):
@@ -29,7 +23,6 @@ class Roslyna(ABC):
         """Повертає сезон цвітіння/плодоношення."""
         pass
 
-    # Реалізовані методи (загальні для всіх рослин)
     def otrymaty_povnu_informatsiyu(self):
         """Повертає повний рядок інформації про рослину."""
         status = "✅ ТАК (Червона Книга)" if self.u_chervoniy_knizi else "❌ НІ"
@@ -54,21 +47,18 @@ class Derevo(Roslyna):
         self.vysota = vysota  # Власне поле
         self.typ_lystya = typ_lystya  # Власне поле ("листяне", "хвойне")
 
-    # Реалізація абстрактних методів
     def kharakterystyka_vydu(self):
         return f"Багаторічна, деревна рослина. Тип листя: {self.typ_lystya}."
 
     def sezonist(self):
         return "Цвітіння/Плодоношення: весна-літо."
 
-    # Власний метод
     def skynuty_lystya(self):
         """Моделює процес скидання листя."""
         if self.typ_lystya.lower() == "листяне":
-            return f"🌿 {self.nazva} ({self.typ_lystya}) скидає листя восени."
-        return f"🌲 {self.nazva} ({self.typ_lystya}) залишається зеленим цілий рік."
+            return f" {self.nazva} ({self.typ_lystya}) скидає листя восени."
+        return f" {self.nazva} ({self.typ_lystya}) залишається зеленим цілий рік."
 
-    # Доповнення до загальної інформації
     def otrymaty_povnu_informatsiyu(self):
         base_info = super().otrymaty_povnu_informatsiyu()
         return base_info + f"\nДодатково: Висота {self.vysota} м.\n" + self.skynuty_lystya()
@@ -78,7 +68,7 @@ class Kvity(Roslyna):
     """Похідний клас Квіти."""
 
     def __init__(self, nazva, latynska_nazva, mistse_zrostannya, u_chervoniy_knizi, kolir_pelyustok, tryvalist_zhyttya):
-        super().__init__(nazva, mistse_zrostannya, u_chervoniy_knizi)
+        super().__init__(nazva, latynska_nazva, mistse_zrostannya, u_chervoniy_knizi)
         self.kolir_pelyustok = kolir_pelyustok  # Власне поле
         self.tryvalist_zhyttya = tryvalist_zhyttya  # Власне поле ("однорічна", "багаторічна")
 
@@ -89,22 +79,16 @@ class Kvity(Roslyna):
     def sezonist(self):
         return "Цвітіння: весна-літо."
 
-    # Власний метод
     def buket(self):
         """Перевіряє придатність для букету."""
         if self.tryvalist_zhyttya.lower() == "багаторічна":
-            return f"💐 {self.nazva} ({self.kolir_pelyustok}) - чудово підходить для букету."
-        return f"🌱 {self.nazva} - краще залишити рости."
+            return f" {self.nazva} ({self.kolir_pelyustok}) - чудово підходить для букету."
+        return f" {self.nazva} - краще залишити рости."
 
-    # Доповнення до загальної інформації
     def otrymaty_povnu_informatsiyu(self):
         base_info = super().otrymaty_povnu_informatsiyu()
         return base_info + f"\nДодатково: Колір пелюсток {self.kolir_pelyustok}.\n" + self.buket()
 
-
-# =============================================================================
-# ЧАСТИНА 2: БАЗА ДАНИХ (МАСИВ) ТА GUI (TKINTER)
-# =============================================================================
 
 class PlantApp(tk.Tk):
     def __init__(self):
@@ -112,7 +96,6 @@ class PlantApp(tk.Tk):
         self.title("Лабораторна Робота: Рослинництво (GUI + Ієрархія Класів)")
         self.geometry("900x650")
 
-        # База даних (масив)
         self.base_roslyn = self.create_initial_data()
 
         self.create_widgets()
@@ -130,6 +113,9 @@ class PlantApp(tk.Tk):
 
     def create_widgets(self):
         """Створення основних елементів GUI."""
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=0)
 
         # 1. Рамка для виведення інформації
         info_frame = ttk.LabelFrame(self, text="ℹ️ Інформація та Результати", padding="10")
@@ -153,14 +139,12 @@ class PlantApp(tk.Tk):
         ttk.Button(button_frame, text="Знайти Червону Книгу 🔴", command=self.find_red_book).pack(side="left", padx=5,
                                                                                                  pady=5)
 
-        # 3. Рамка для додавання об'єкта
-        add_frame = ttk.LabelFrame(self, text="➕ Додати Нову Рослину", padding="10")
+        add_frame = ttk.LabelFrame(self, text="Додати Нову Рослину", padding="10")
         add_frame.grid(row=1, column=1, padx=10, pady=5, sticky="nsew")
 
-        # Створення елементів введення
+        #елементів введення
         self.create_add_form(add_frame)
 
-    # --- Методи обробки даних ---
 
     def show_all_plants(self):
         """Виводить повну інформацію про всі рослини у базу."""
@@ -190,7 +174,7 @@ class PlantApp(tk.Tk):
         if not found:
             self.text_output.insert(tk.END, "У базі не знайдено рослин, занесених до Червоної книги України.\n")
 
-    # --- Методи для додавання об'єктів (GUI) ---
+    # Gui
 
     def create_add_form(self, frame):
         """Створює елементи керування для додавання нової рослини."""
@@ -252,10 +236,10 @@ class PlantApp(tk.Tk):
     def add_plant_to_base(self):
         """Зчитує дані з форми та додає новий об'єкт до бази."""
         try:
-            # Збір загальних даних
-            nazva = self.entries["Назва:"].get()
-            latynska_nazva = self.entries["Латинська назва:"].get()
-            mistse_zrostannya = self.entries["Місце зростання:"].get()
+            # Збір загальних даних (trim)
+            nazva = self.entries["Назва:"].get().strip()
+            latynska_nazva = self.entries["Латинська назва:"].get().strip()
+            mistse_zrostannya = self.entries["Місце зростання:"].get().strip()
             u_chervoniy_knizi = self.red_book_var.get()
 
             # Перевірка на порожні поля
@@ -266,20 +250,29 @@ class PlantApp(tk.Tk):
 
             # Збір специфічних даних та створення об'єкта
             if selected_class == "Дерево":
-                vysota = float(self.specific_entries["Висота (м):"].get())
-                typ_lystya = self.specific_entries["Тип листя (листяне/хвойне):"].get()
+                vysota_str = self.specific_entries["Висота (м):"].get().strip()
+                if not vysota_str:
+                    raise ValueError("Вкажіть висоту дерева.")
+                try:
+                    vysota = float(vysota_str)
+                except ValueError:
+                    raise ValueError("Висота має бути числом (наприклад: 12.5).")
+                typ_lystya = self.specific_entries["Тип листя (листяне/хвойне):"].get().strip()
+                if not typ_lystya:
+                    raise ValueError("Вкажіть тип листя.")
                 new_plant = Derevo(nazva, latynska_nazva, mistse_zrostannya, u_chervoniy_knizi, vysota, typ_lystya)
 
             elif selected_class == "Квіти":
-                kolir_pelyustok = self.specific_entries["Колір пелюсток:"].get()
-                tryvalist_zhyttya = self.specific_entries["Тривалість життя (однорічна/багаторічна):"].get()
+                kolir_pelyustok = self.specific_entries["Колір пелюсток:"].get().strip()
+                tryvalist_zhyttya = self.specific_entries["Тривалість життя (однорічна/багаторічна):"].get().strip()
+                if not kolir_pelyustok or not tryvalist_zhyttya:
+                    raise ValueError("Заповніть, будь ласка, всі специфічні поля для квітки.")
                 new_plant = Kvity(nazva, latynska_nazva, mistse_zrostannya, u_chervoniy_knizi, kolir_pelyustok,
                                   tryvalist_zhyttya)
 
             else:
                 raise ValueError("Невірний тип об'єкта.")
 
-            # Додавання до бази
             self.base_roslyn.append(new_plant)
             messagebox.showinfo("Успіх", f"Об'єкт '{new_plant.nazva}' успішно додано до бази!")
 
