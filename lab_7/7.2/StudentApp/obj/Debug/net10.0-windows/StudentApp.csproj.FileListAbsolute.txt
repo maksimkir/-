@@ -1,5 +1,0 @@
-C:\F\CHNU\labs_2course\ПКПЗ\lab_7\StudentApp\obj\Debug\net10.0-windows\StudentApp.GeneratedMSBuildEditorConfig.editorconfig
-C:\F\CHNU\labs_2course\ПКПЗ\lab_7\StudentApp\obj\Debug\net10.0-windows\StudentApp.AssemblyInfoInputs.cache
-C:\F\CHNU\labs_2course\ПКПЗ\lab_7\StudentApp\obj\Debug\net10.0-windows\StudentApp.AssemblyInfo.cs
-C:\F\CHNU\labs_2course\ПКПЗ\lab_7\StudentApp\obj\Debug\net10.0-windows\StudentApp.csproj.CoreCompileInputs.cache
-C:\F\CHNU\labs_2course\ПКПЗ\lab_7\StudentApp\obj\Debug\net10.0-windows\StudentApp.sourcelink.json
