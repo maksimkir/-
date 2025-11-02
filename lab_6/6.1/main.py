@@ -25,7 +25,7 @@ class Roslyna(ABC):
 
     def otrymaty_povnu_informatsiyu(self):
         """Повертає повний рядок інформації про рослину."""
-        status = "✅ ТАК (Червона Книга)" if self.u_chervoniy_knizi else "❌ НІ"
+        status = " ТАК (Червона Книга)" if self.u_chervoniy_knizi else " НІ"
         info = f"-- {self.__class__.__name__.upper()} --\n"
         info += f"Назва: {self.nazva} ({self.latynska_nazva})\n"
         info += f"Місце зростання: {self.mistse_zrostannya}\n"
@@ -136,7 +136,7 @@ class PlantApp(tk.Tk):
 
         ttk.Button(button_frame, text="Показати всю Базу", command=self.show_all_plants).pack(side="left", padx=5,
                                                                                               pady=5)
-        ttk.Button(button_frame, text="Знайти Червону Книгу 🔴", command=self.find_red_book).pack(side="left", padx=5,
+        ttk.Button(button_frame, text="Знайти Червону Книгу ", command=self.find_red_book).pack(side="left", padx=5,
                                                                                                  pady=5)
 
         add_frame = ttk.LabelFrame(self, text="Додати Нову Рослину", padding="10")
