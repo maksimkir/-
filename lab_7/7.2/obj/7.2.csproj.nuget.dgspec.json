@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_7\\7.2\\6.2.csproj": {}
+    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_7\\7.2\\7.2.csproj": {}
   },
   "projects": {
-    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_7\\7.2\\6.2.csproj": {
+    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_7\\7.2\\7.2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_7\\7.2\\6.2.csproj",
-        "projectName": "6.2",
-        "projectPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_7\\7.2\\6.2.csproj",
+        "projectUniqueName": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_7\\7.2\\7.2.csproj",
+        "projectName": "7.2",
+        "projectPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_7\\7.2\\7.2.csproj",
         "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
         "outputPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_7\\7.2\\obj\\",
         "projectStyle": "PackageReference",
