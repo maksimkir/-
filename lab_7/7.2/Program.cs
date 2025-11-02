@@ -87,9 +87,9 @@ namespace StudentApp
             this.btnShowTwos.Click += new EventHandler(this.btnShowTwos_Click);
 
             this.listBoxResults.Location = new System.Drawing.Point(25, 210);
-            this.listBoxResults.Size = new System.Drawing.Size(405, 180); 
+            this.listBoxResults.Size = new System.Drawing.Size(405, 180);
 
-            this.ClientSize = new System.Drawing.Size(460, 420)
+            this.ClientSize = new System.Drawing.Size(460, 420);
             this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.labelGroup);
