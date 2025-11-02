@@ -1,0 +1,15 @@
+C:\F\CHNU\labs_2course\ПКПЗ\lab_7\7.2\bin\Debug\net9.0-windows\7.2.exe
+C:\F\CHNU\labs_2course\ПКПЗ\lab_7\7.2\bin\Debug\net9.0-windows\7.2.deps.json
+C:\F\CHNU\labs_2course\ПКПЗ\lab_7\7.2\bin\Debug\net9.0-windows\7.2.runtimeconfig.json
+C:\F\CHNU\labs_2course\ПКПЗ\lab_7\7.2\bin\Debug\net9.0-windows\7.2.dll
+C:\F\CHNU\labs_2course\ПКПЗ\lab_7\7.2\bin\Debug\net9.0-windows\7.2.pdb
+C:\F\CHNU\labs_2course\ПКПЗ\lab_7\7.2\obj\Debug\net9.0-windows\7.2.GeneratedMSBuildEditorConfig.editorconfig
+C:\F\CHNU\labs_2course\ПКПЗ\lab_7\7.2\obj\Debug\net9.0-windows\7.2.AssemblyInfoInputs.cache
+C:\F\CHNU\labs_2course\ПКПЗ\lab_7\7.2\obj\Debug\net9.0-windows\7.2.AssemblyInfo.cs
+C:\F\CHNU\labs_2course\ПКПЗ\lab_7\7.2\obj\Debug\net9.0-windows\7.2.csproj.CoreCompileInputs.cache
+C:\F\CHNU\labs_2course\ПКПЗ\lab_7\7.2\obj\Debug\net9.0-windows\7.2.sourcelink.json
+C:\F\CHNU\labs_2course\ПКПЗ\lab_7\7.2\obj\Debug\net9.0-windows\7.2.dll
+C:\F\CHNU\labs_2course\ПКПЗ\lab_7\7.2\obj\Debug\net9.0-windows\refint\7.2.dll
+C:\F\CHNU\labs_2course\ПКПЗ\lab_7\7.2\obj\Debug\net9.0-windows\7.2.pdb
+C:\F\CHNU\labs_2course\ПКПЗ\lab_7\7.2\obj\Debug\net9.0-windows\7.2.genruntimeconfig.cache
+C:\F\CHNU\labs_2course\ПКПЗ\lab_7\7.2\obj\Debug\net9.0-windows\ref\7.2.dll
