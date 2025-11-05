@@ -7,7 +7,7 @@ namespace StudentApp
 {
     public struct STUDENT
     {
-        public string NAME;     // Прізвище та ініціали
+        public string NAME;     
         public string GROUP;    // Номер групи
         public int[] SUBJECT;   // Масив оцінок (5 предметів)
     }
