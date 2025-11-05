@@ -1,0 +1,15 @@
+c:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.1\obj\Debug\net9.0-windows\5.1.GeneratedMSBuildEditorConfig.editorconfig
+c:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.1\obj\Debug\net9.0-windows\5.1.AssemblyInfoInputs.cache
+c:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.1\obj\Debug\net9.0-windows\5.1.AssemblyInfo.cs
+c:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.1\obj\Debug\net9.0-windows\5.1.csproj.CoreCompileInputs.cache
+c:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.1\obj\Debug\net9.0-windows\5.1.sourcelink.json
+C:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.1\bin\Debug\net9.0-windows\5.1.exe
+C:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.1\bin\Debug\net9.0-windows\5.1.deps.json
+C:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.1\bin\Debug\net9.0-windows\5.1.runtimeconfig.json
+C:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.1\bin\Debug\net9.0-windows\5.1.dll
+C:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.1\bin\Debug\net9.0-windows\5.1.pdb
+C:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.1\obj\Debug\net9.0-windows\5.1.dll
+C:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.1\obj\Debug\net9.0-windows\refint\5.1.dll
+C:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.1\obj\Debug\net9.0-windows\5.1.pdb
+C:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.1\obj\Debug\net9.0-windows\5.1.genruntimeconfig.cache
+C:\F\CHNU\labs_2course\ПКПЗ\lab_5\5.1\obj\Debug\net9.0-windows\ref\5.1.dll
