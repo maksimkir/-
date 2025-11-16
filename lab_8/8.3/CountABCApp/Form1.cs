@@ -1,107 +1,88 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 
-namespace QuizApplication
+namespace SeasonsQuiz
 {
-    // Частковий клас, що містить логіку
     public partial class Form1 : Form
     {
-        // 1. Змінна стану для керування циклом while (вимога)
-        private bool continueQuiz = true;
+        // наш dictionary
+        Dictionary<Season, List<(string month, int days)>> seasons =
+            new Dictionary<Season, List<(string, int)>>()
+            {
+                { Season.Весна, new List<(string, int)>
+                    { ("Березень", 31), ("Квітень", 30), ("Травень", 31) } },
 
-        // Enum для чіткого представлення пори року
-        public enum Season
-        {
-            Spring, 
-            Summer, 
-            Autumn, 
-            Winter  
-        }
+                { Season.Літо, new List<(string, int)>
+                    { ("Червень", 30), ("Липень", 31), ("Серпень", 31) } },
 
-        // Dictionary для зберігання даних
-        public static readonly Dictionary<string, Dictionary<string, int>> SeasonsData =
-            new Dictionary<string, Dictionary<string, int>>(StringComparer.OrdinalIgnoreCase)
-        {
-            { "Весна", new Dictionary<string, int> { { "Березень", 31 }, { "Квітень", 30 }, { "Травень", 31 } } },
-            { "Літо", new Dictionary<string, int> { { "Червень", 30 }, { "Липень", 31 }, { "Серпень", 31 } } },
-            { "Осінь", new Dictionary<string, int> { { "Вересень", 30 }, { "Жовтень", 31 }, { "Листопад", 30 } } },
-            { "Зима", new Dictionary<string, int> { { "Грудень", 31 }, { "Січень", 31 }, { "Лютий", 28 } } } 
-        };
+                { Season.Осінь, new List<(string, int)>
+                    { ("Вересень", 30), ("Жовтень", 31), ("Листопад", 30) } },
 
-        // Конструктор форми
+                { Season.Зима, new List<(string, int)>
+                    { ("Грудень", 31), ("Січень", 31), ("Лютий", 28) } }
+            };
+
         public Form1()
         {
-            InitializeComponent(); 
-            this.SubmitButton.Click += new System.EventHandler(this.SubmitButton_Click);
+            InitializeComponent();
         }
 
-        // 2. Метод, що використовує SWITCH (вимога)
-        public string GetSeasonDetails(string seasonName)
+        private void btnShow_Click(object sender, EventArgs e)
         {
-            if (Enum.TryParse(seasonName, true, out Season selectedSeason))
+            bool work = true;
+
+            while (work)
             {
-                // Оператор switch на enum (шаблон констант)
-                switch (selectedSeason)
+                string input = comboBoxSeason.Text.Trim().ToLower();
+                Season season;
+
+                // switch згідно умови
+                switch (input)
                 {
-                    case Season.Spring:
-                        return FormatDetails("Весна");
-                    case Season.Summer:
-                        return FormatDetails("Літо");
-                    case Season.Autumn:
-                        return FormatDetails("Осінь");
-                    case Season.Winter:
-                        return FormatDetails("Зима");
+                    case "весна":
+                        season = Season.Весна;
+                        break;
+
+                    case "літо":
+                        season = Season.Літо;
+                        break;
+
+                    case "осінь":
+                        season = Season.Осінь;
+                        break;
+
+                    case "зима":
+                        season = Season.Зима;
+                        break;
+
                     default:
-                        return "Невідома пора року."; 
+                        MessageBox.Show("Помилка: введіть коректну пору року!");
+                        return;
                 }
-            }
-            else
-            {
-                return "Некоректний ввід. Введіть одну з назв або 0 для виходу.";
+
+                // виведення результату
+                textBoxResult.Clear();
+                foreach (var m in seasons[season])
+                {
+                    textBoxResult.AppendText($"{m.month} – {m.days} днів\n");
+                }
+
+                // запит — продовжити чи ні
+                DialogResult answer = MessageBox.Show(
+                    "Бажаєте продовжити?", 
+                    "Вікторина", 
+                    MessageBoxButtons.YesNo, 
+                    MessageBoxIcon.Question);
+
+                if (answer == DialogResult.No)
+                    work = false;  // вихід з while
             }
         }
 
-        // Допоміжний метод для форматування
-        private string FormatDetails(string key)
+        private void btnExit_Click(object sender, EventArgs e)
         {
-            var details = SeasonsData[key];
-            var result = new StringBuilder($"**{key}** – ");
-            foreach (var month in details)
-            {
-                result.Append($"{month.Key} ({month.Value} днів), ");
-            }
-            return result.ToString().TrimEnd(' ', ',');
-        }
-
-        // 3. Обробник кнопки, що імітує цикл WHILE (вимога)
-        private void SubmitButton_Click(object? sender, EventArgs e) 
-        {
-            // Отримання даних користувача
-            string userInput = InputTextBox.Text.Trim();
-
-            // Перевірка умови завершення циклу
-            if (userInput == "0")
-            {
-                continueQuiz = false; 
-            }
-
-            // Імітація тіла циклу while
-            if (continueQuiz)
-            {
-                string result = GetSeasonDetails(userInput); 
-                OutputLabel.Text = result;
-            }
-            else
-            {
-                OutputLabel.Text = "Робота програми завершена (введено '0').";
-                SubmitButton.Enabled = false; 
-                InputTextBox.Enabled = false;
-            }
-            
-            InputTextBox.Clear();
-            InputTextBox.Focus();
+            this.Close();
         }
     }
 }
