@@ -77,7 +77,7 @@ namespace SymbolListApp
                 MessageBox.Show("Спершу зчитайте файл!");
                 return;
             }
-
+            
             List<char> unique = new List<char>();
 
             foreach (char c in symbols)
