@@ -3,3 +3,13 @@ C:\F\CHNU\labs_2course\ПКПЗ\lab_8\8.3\obj\Debug\net9.0-windows\8.3.AssemblyI
 C:\F\CHNU\labs_2course\ПКПЗ\lab_8\8.3\obj\Debug\net9.0-windows\8.3.AssemblyInfo.cs
 C:\F\CHNU\labs_2course\ПКПЗ\lab_8\8.3\obj\Debug\net9.0-windows\8.3.csproj.CoreCompileInputs.cache
 C:\F\CHNU\labs_2course\ПКПЗ\lab_8\8.3\obj\Debug\net9.0-windows\8.3.sourcelink.json
+C:\F\CHNU\labs_2course\ПКПЗ\lab_8\8.3\bin\Debug\net9.0-windows\8.3.exe
+C:\F\CHNU\labs_2course\ПКПЗ\lab_8\8.3\bin\Debug\net9.0-windows\8.3.deps.json
+C:\F\CHNU\labs_2course\ПКПЗ\lab_8\8.3\bin\Debug\net9.0-windows\8.3.runtimeconfig.json
+C:\F\CHNU\labs_2course\ПКПЗ\lab_8\8.3\bin\Debug\net9.0-windows\8.3.dll
+C:\F\CHNU\labs_2course\ПКПЗ\lab_8\8.3\bin\Debug\net9.0-windows\8.3.pdb
+C:\F\CHNU\labs_2course\ПКПЗ\lab_8\8.3\obj\Debug\net9.0-windows\8.3.dll
+C:\F\CHNU\labs_2course\ПКПЗ\lab_8\8.3\obj\Debug\net9.0-windows\refint\8.3.dll
+C:\F\CHNU\labs_2course\ПКПЗ\lab_8\8.3\obj\Debug\net9.0-windows\8.3.pdb
+C:\F\CHNU\labs_2course\ПКПЗ\lab_8\8.3\obj\Debug\net9.0-windows\8.3.genruntimeconfig.cache
+C:\F\CHNU\labs_2course\ПКПЗ\lab_8\8.3\obj\Debug\net9.0-windows\ref\8.3.dll
