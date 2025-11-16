@@ -10,12 +10,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("8.3")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("5.3")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0632d995f2bba001158dea5bbb023d46c29e0477")]
-[assembly: System.Reflection.AssemblyProductAttribute("8.3")]
-[assembly: System.Reflection.AssemblyTitleAttribute("8.3")]
+[assembly: System.Reflection.AssemblyProductAttribute("5.3")]
+[assembly: System.Reflection.AssemblyTitleAttribute("5.3")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]
