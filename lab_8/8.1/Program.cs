@@ -17,7 +17,7 @@ namespace KomunalniBorgy
 
     public class Form1 : Form
     {
-        // GUI елементи
+     
         private Label label1, label2, label3, label4, label5;
         private TextBox txtName, txtDebt, txtService, txtAddress, txtSearch;
         private Button btnAdd, btnShowAll, btnCalculate, btnFind;
@@ -28,7 +28,7 @@ namespace KomunalniBorgy
 
         public Form1()
         {
-            // 🔹 Основні параметри форми
+
             this.Text = "Облік комунальних боргів";
             this.ClientSize = new System.Drawing.Size(720, 300);
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -38,7 +38,7 @@ namespace KomunalniBorgy
             int top = 20;
             int step = 35;
 
-            // 🔹 Поля вводу
+           
             label1 = new Label() { Text = "Прізвище:", Left = leftLabel, Top = top + 3, Width = 90 };
             txtName = new TextBox() { Left = leftBox, Top = top, Width = 150 };
 
@@ -51,7 +51,7 @@ namespace KomunalniBorgy
             label4 = new Label() { Text = "Адреса:", Left = leftLabel, Top = top + step * 3 + 3, Width = 90 };
             txtAddress = new TextBox() { Left = leftBox, Top = top + step * 3, Width = 150 };
 
-            // 🔹 Кнопки
+         
             int btnTop = top + step * 4 + 10;
             btnAdd = new Button() { Text = "Додати", Left = leftLabel, Top = btnTop, Width = 80 };
             btnAdd.Click += BtnAdd_Click;
@@ -62,7 +62,7 @@ namespace KomunalniBorgy
             btnCalculate = new Button() { Text = "Розрахувати", Left = leftLabel + 200, Top = btnTop, Width = 100 };
             btnCalculate.Click += BtnCalculate_Click;
 
-            // 🔹 Список праворуч
+     
             listBox1 = new ListBox()
             {
                 Left = 330,
@@ -89,7 +89,7 @@ namespace KomunalniBorgy
             });
         }
 
-        // 📦 Додати абонента
+        //Додати абонента
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             try
@@ -120,7 +120,7 @@ namespace KomunalniBorgy
             }
         }
 
-        // 📋 Показати всіх
+        //Показати всіх
         private void BtnShowAll_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
@@ -130,7 +130,7 @@ namespace KomunalniBorgy
             }
         }
 
-        // 🧮 Розрахувати боржників
+        //Розрахувати боржників
         private void BtnCalculate_Click(object sender, EventArgs e)
         {
             if (abonents.Count == 0)
@@ -150,7 +150,7 @@ namespace KomunalniBorgy
                 "Результат");
         }
 
-        // 🔍 Пошук
+        //Пошук
         private void BtnFind_Click(object sender, EventArgs e)
         {
             string searchName = txtSearch.Text.Trim();

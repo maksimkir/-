@@ -6,7 +6,6 @@ namespace SeasonsQuiz
 {
     public partial class Form1 : Form
     {
-        // наш dictionary
         Dictionary<Season, List<(string month, int days)>> seasons =
             new Dictionary<Season, List<(string, int)>>()
             {
@@ -37,7 +36,6 @@ namespace SeasonsQuiz
                 string input = comboBoxSeason.Text.Trim().ToLower();
                 Season season;
 
-                // switch згідно умови
                 switch (input)
                 {
                     case "весна":
@@ -61,14 +59,12 @@ namespace SeasonsQuiz
                         return;
                 }
 
-                // виведення результату
                 textBoxResult.Clear();
                 foreach (var m in seasons[season])
                 {
                     textBoxResult.AppendText($"{m.month} – {m.days} днів\n");
                 }
 
-                // запит — продовжити чи ні
                 DialogResult answer = MessageBox.Show(
                     "Бажаєте продовжити?", 
                     "Вікторина", 
