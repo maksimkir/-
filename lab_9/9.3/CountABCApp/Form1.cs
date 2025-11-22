@@ -15,11 +15,11 @@ namespace ParenBalanceApp
         private Label lblExpr;
         private Label lblOutput;
 
-        // Масив-стек і покажчик вершини стеку реалізовані всередині класу ArrayStack
+        // Масив-стек і покажчик вершини 
         private class ArrayStack
         {
             private int[] arr;
-            private int top; // індекс вершини, -1 коли порожній
+            private int top; 
             public int Capacity => arr.Length;
 
             public ArrayStack(int capacity)
@@ -164,11 +164,6 @@ namespace ParenBalanceApp
             public string ErrorMessage { get; set; } = "";
         }
 
-        /// <summary>
-        /// Перевіряє збалансованість круглих дужок у виразі.
-        /// Використовує стек, реалізований на масиві цілих (позиції відповідних відкритих дужок).
-        /// Повертає пари позицій (1-based). Сортує по позиції закриваючих дужок зростаюче.
-        /// </summary>
         private CheckResult CheckParenthesesBalance(string expr)
         {
             var res = new CheckResult();
@@ -177,22 +172,19 @@ namespace ParenBalanceApp
             ArrayStack stack = new ArrayStack(expr.Length);
             var pairs = new List<(int OpenPos, int ClosePos)>();
 
-            // Проходимо символи зліва направо, індексація у тексті — 1-based
             for (int i = 0; i < expr.Length; i++)
             {
                 char ch = expr[i];
-                int pos = i + 1; // позиція у тексті (1-based)
+                int pos = i + 1; 
 
                 if (ch == '(')
                 {
-                    // кладемо позицію відкриваючої дужки в стек
                     try
                     {
                         stack.Push(pos);
                     }
                     catch (InvalidOperationException)
                     {
-                        // Переповнення стеку — теоретично не повинно статися, бо capacity = expr.Length
                         res.IsBalanced = false;
                         res.ErrorMessage = "Переповнення стеку при спробі додати відкриваючу дужку.";
                         return res;
@@ -200,7 +192,6 @@ namespace ParenBalanceApp
                 }
                 else if (ch == ')')
                 {
-                    // при зустрічі закриваючої — перевіряємо, чи є у стеку відповідна відкрита
                     if (stack.IsEmpty())
                     {
                         res.IsBalanced = false;
@@ -213,21 +204,16 @@ namespace ParenBalanceApp
                         pairs.Add((openPos, pos));
                     }
                 }
-                // інші символи ігноруємо
             }
-
-            // Після проходу по всіх символах стек повинен бути порожній
+   
             if (!stack.IsEmpty())
             {
                 res.IsBalanced = false;
                 // якщо залишились відкриті дужки — повідомляємо позицію першої (зверху стеку)
-                int remainingOpenPos = stack.Pop(); // можна показати верхню (останню відкриту)
+                int remainingOpenPos = stack.Pop(); 
                 res.ErrorMessage = $"Є незакриті відкриваючі дужки. Остання незакрита на позиції {remainingOpenPos}.";
                 return res;
             }
-
-            // Якщо сюди дійшли — все збалансовано
-            // Потрібно вивести пари по зростанню позиції закриваючої дужки
             pairs.Sort((a, b) => a.ClosePos.CompareTo(b.ClosePos));
             res.IsBalanced = true;
             res.Pairs = pairs;

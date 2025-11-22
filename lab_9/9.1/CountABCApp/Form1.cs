@@ -53,7 +53,7 @@ namespace SymbolListApp
             this.Controls.Add(txtProcessed);
         }
 
-        // 1) Зчитування файлу
+        //  Зчитування файлу
         private void BtnLoad_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -69,7 +69,7 @@ namespace SymbolListApp
             }
         }
 
-        // 2) Видалення повторів
+        //  Видалення повторів
         private void BtnProcess_Click(object sender, EventArgs e)
         {
             if (symbols.Count == 0)
@@ -89,7 +89,7 @@ namespace SymbolListApp
             txtProcessed.Text = string.Join("", symbols);
         }
 
-        // 3) Збереження у файл (по 8 символів у рядку)
+        //  Збереження у файл (по 8 символів у рядку)
         private void BtnSave_Click(object sender, EventArgs e)
         {
             if (symbols.Count == 0)

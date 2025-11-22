@@ -72,7 +72,7 @@ namespace SeasonsQuiz
                     MessageBoxIcon.Question);
 
                 if (answer == DialogResult.No)
-                    work = false;  // вихід з while
+                    work = false;
             }
         }
 
