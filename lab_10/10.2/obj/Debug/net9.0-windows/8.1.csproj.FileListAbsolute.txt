@@ -13,3 +13,11 @@ C:\F\CHNU\labs_2course\ПКПЗ\lab_8\8.1\obj\Debug\net9.0-windows\refint\8.1.dl
 C:\F\CHNU\labs_2course\ПКПЗ\lab_8\8.1\obj\Debug\net9.0-windows\8.1.pdb
 C:\F\CHNU\labs_2course\ПКПЗ\lab_8\8.1\obj\Debug\net9.0-windows\8.1.genruntimeconfig.cache
 C:\F\CHNU\labs_2course\ПКПЗ\lab_8\8.1\obj\Debug\net9.0-windows\ref\8.1.dll
+C:\F\CHNU\labs_2course\ПКПЗ\lab_10\10.2\obj\Debug\net9.0-windows\8.1.GeneratedMSBuildEditorConfig.editorconfig
+C:\F\CHNU\labs_2course\ПКПЗ\lab_10\10.2\obj\Debug\net9.0-windows\8.1.AssemblyInfoInputs.cache
+C:\F\CHNU\labs_2course\ПКПЗ\lab_10\10.2\obj\Debug\net9.0-windows\8.1.AssemblyInfo.cs
+C:\F\CHNU\labs_2course\ПКПЗ\lab_10\10.2\obj\Debug\net9.0-windows\8.1.csproj.CoreCompileInputs.cache
+C:\F\CHNU\labs_2course\ПКПЗ\lab_10\10.2\obj\Debug\net9.0-windows\8.1.sourcelink.json
+C:\F\CHNU\labs_2course\ПКПЗ\lab_10\10.2\obj\Debug\net9.0-windows\8.1.dll
+C:\F\CHNU\labs_2course\ПКПЗ\lab_10\10.2\obj\Debug\net9.0-windows\refint\8.1.dll
+C:\F\CHNU\labs_2course\ПКПЗ\lab_10\10.2\obj\Debug\net9.0-windows\8.1.pdb

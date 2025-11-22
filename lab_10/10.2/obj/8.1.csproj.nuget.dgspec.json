@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_8\\8.1\\8.1.csproj": {}
+    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\8.1.csproj": {}
   },
   "projects": {
-    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_8\\8.1\\8.1.csproj": {
+    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\8.1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_8\\8.1\\8.1.csproj",
+        "projectUniqueName": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\8.1.csproj",
         "projectName": "8.1",
-        "projectPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_8\\8.1\\8.1.csproj",
+        "projectPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\8.1.csproj",
         "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_8\\8.1\\obj\\",
+        "outputPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
