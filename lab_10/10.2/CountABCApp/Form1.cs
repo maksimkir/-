@@ -13,7 +13,7 @@ namespace GraphMatricesApp
             InitializeComponent();
         }
 
-        // ==================== КНОПКА "Завантажити зображення" ====================
+        // КНОПКА "Завантажити зображення"
         private void btnLoadImage_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -35,7 +35,7 @@ namespace GraphMatricesApp
             }
         }
 
-        // ==================== КНОПКА "Побудувати матриці" ====================
+        // КНОПКА "Побудувати матриці" 
         private void btnBuild_Click(object sender, EventArgs e)
         {
             var vertices = ParseVertices(txtVertices.Text);
@@ -60,7 +60,7 @@ namespace GraphMatricesApp
             PopulateIncidence(vertices, edges);
         }
 
-        // ==================== КНОПКА "Очистити" ====================
+        //КНОПКА "Очистити"
         private void btnClear_Click(object sender, EventArgs e)
         {
             dgvAdjacency.Columns.Clear();
@@ -71,7 +71,7 @@ namespace GraphMatricesApp
         }
 
 
-        // ==================== ПАРСИНГ ВЕРШИН ====================
+        // ПАРСИНГ ВЕРШИН
         private List<string> ParseVertices(string text)
         {
             var list = new List<string>();
@@ -82,7 +82,7 @@ namespace GraphMatricesApp
             return list;
         }
 
-        // ==================== ПАРСИНГ РЕБЕР ====================
+        //ПАРСИНГ РЕБЕР 
         private List<(string u, string v)> ParseEdges(string text)
         {
             var edges = new List<(string u, string v)>();
@@ -106,7 +106,7 @@ namespace GraphMatricesApp
             return edges;
         }
 
-        // ==================== МАТРИЦЯ СУМІЖНОСТІ ====================
+        // МАТРИЦЯ СУМІЖНОСТІ
         private void PopulateAdjacency(List<string> vertices, List<(string u, string v)> edges)
         {
             dgvAdjacency.Columns.Clear();
@@ -135,11 +135,11 @@ namespace GraphMatricesApp
             {
                 int i = vertices.IndexOf(u);
                 int j = vertices.IndexOf(v);
-                dgvAdjacency[j, i].Value = 1;
+                dgvAdjacency[i, j].Value = 1;
             }
         }
 
-        // ==================== МАТРИЦЯ ІНЦИДЕНТНОСТІ ====================
+        // МАТРИЦЯ ІНЦИДЕНТНОСТІ 
         private void PopulateIncidence(List<string> vertices, List<(string u, string v)> edges)
         {
             dgvIncidence.Columns.Clear();
@@ -164,8 +164,8 @@ namespace GraphMatricesApp
             for (int k = 0; k < m; k++)
             {
                 var (u, v) = edges[k];
-                dgvIncidence[k, vertices.IndexOf(u)].Value = -1;
-                dgvIncidence[k, vertices.IndexOf(v)].Value = +1;
+                dgvIncidence[vertices.IndexOf(u), k].Value = -1;
+                dgvIncidence[vertices.IndexOf(v), k].Value = +1;
             }
         }
     }

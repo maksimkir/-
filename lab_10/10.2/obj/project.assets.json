@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\8.1.csproj",
-      "projectName": "8.1",
-      "projectPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\8.1.csproj",
+      "projectUniqueName": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\10.2.csproj",
+      "projectName": "10.2",
+      "projectPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\10.2.csproj",
       "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
       "outputPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\obj\\",
       "projectStyle": "PackageReference",

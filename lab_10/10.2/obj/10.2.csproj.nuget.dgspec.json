@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\CountABCApp\\CountABCApp.csproj": {}
+    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\10.2.csproj": {}
   },
   "projects": {
-    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\CountABCApp\\CountABCApp.csproj": {
+    "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\10.2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\CountABCApp\\CountABCApp.csproj",
-        "projectName": "CountABCApp",
-        "projectPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\CountABCApp\\CountABCApp.csproj",
+        "projectUniqueName": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\10.2.csproj",
+        "projectName": "10.2",
+        "projectPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\10.2.csproj",
         "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\CountABCApp\\obj\\",
+        "outputPath": "C:\\F\\CHNU\\labs_2course\\ПКПЗ\\lab_10\\10.2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
