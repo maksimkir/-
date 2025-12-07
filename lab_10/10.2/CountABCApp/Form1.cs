@@ -13,15 +13,12 @@ namespace GraphMatricesApp
             InitializeComponent();
         }
 
-        // КНОПКА "Завантажити зображення"
+        //  "Завантажити зображення"
         private void btnLoadImage_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Image Files|*.png;*.jpg;*.jpeg;*.bmp|All files|*.*";
-
-            // Підставимо шлях до твого файла
-            ofd.FileName = "/mnt/data/5920322e-cfa7-43b2-a855-a27b0f0cee4e.png";
-
+            
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -35,7 +32,7 @@ namespace GraphMatricesApp
             }
         }
 
-        // КНОПКА "Побудувати матриці" 
+        //  "Побудувати матриці" 
         private void btnBuild_Click(object sender, EventArgs e)
         {
             var vertices = ParseVertices(txtVertices.Text);
@@ -60,7 +57,7 @@ namespace GraphMatricesApp
             PopulateIncidence(vertices, edges);
         }
 
-        //КНОПКА "Очистити"
+        // "Очистити"
         private void btnClear_Click(object sender, EventArgs e)
         {
             dgvAdjacency.Columns.Clear();

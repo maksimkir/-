@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CountABCApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a7f65930869dc134fbf2f12603998884fed0c187")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6dc7cd1e5038dbb85a2777f6b8ab1cc66590b8f0")]
 [assembly: System.Reflection.AssemblyProductAttribute("CountABCApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CountABCApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
